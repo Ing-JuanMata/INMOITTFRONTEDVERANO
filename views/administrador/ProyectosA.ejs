@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <META name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Administrador </title>
+    <link preload="styleAdmin.css" href="css/styleAdmin.css" as="style">
+    <link preload="styleAdmin.css" href="css/normalice.css">
+    <link href="css/styleAdmin.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+    <!-- Iconos de footer -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" >
+       
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color:var(--principal)">
+        <div class="container-fluid">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-building-warehouse" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3 21v-13l9 -4l9 4v13" />
+                <path d="M13 13h4v8h-10v-6h6" />
+                <path d="M13 21v-9a1 1 0 0 0 -1 -1h-2a1 1 0 0 0 -1 1v3" />
+                </svg>
+            <a class="d-block p-2 text-white navbar-brand" href="index.html" style="background-color:var(--principal); font-size: 1.5rem;">Inmob<strong>ITT</strong></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent" style="float: right;">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="font-size: 1rem;">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="Usuarios.html">Usuarios</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="SobreEmpresa.html">Sobre la empresa</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="ProyectosA.html">Proyectos</a>
+                      </li>    
+                </ul>
+            </div>
+            <div class="dropdown ">
+                <a href="#" class="d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none dropdown-toggle" id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
+                  <img src="https://github.com/mdo.png" alt="Admin" width="40" height="40" class="rounded-circle">
+                </a>
+                <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
+                  <li><a class="dropdown-item" href="#">Ajustes</a></li>
+                  <li><a class="dropdown-item" href="#">Perfil</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Cerra sesión</a></li>
+                </ul>
+              </div>
+            </div>
+        </div>
+    </nav><!--   NAVBAR   -->
+
+    <!--   Banner   -->
+    <div class="position-relative overflow-hidden p-3 p-md-5  text-center bg-light" style="background-image: url(IMG/FProyectos2.png);  background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center; height: 25rem;">
+        <div class="col-md-5 p-lg-5 mx-auto my-5">
+          <h1 class="display-4 fw-normal text-white " style="font-size: 3rem;">Proyectos</h1>
+        </div>
+        <div class="product-device shadow-sm d-none d-md-block"></div>
+        <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+      </div>
+    
+
+
+<main class="contenedor sombra">
+    <div class="album py-5 ">
+        <div class="container">
+    
+          <div class="row">
+            <div class="col">
+              <div class="card shadow-sm"> 
+                <img src="IMG/inmo2.jpg" width="100%" height="225">
+                
+                <div class="card-body">
+                  <p class="card-text" >Casa en venta en la col. San Felipe Hueyotlipan ubicada muy cerca del Fracc. Antigua Cementera, con accesos desde el blvd San Felipe y la autopista Mex-Pue. La casa cuenta con dos niveles distribuidos de la siguiente manera, planta baja: sala, comedor, cocina integral, patio de ...</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    </div>
+                    <small class="text-muted">9 mins</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col">
+              <div class="card shadow-sm">
+                <img src="IMG/c3.jpg" width="100%" height="225">
+                <div class="card-body">
+                  <p class="card-text">Excelente oportunidad de adquirir una casa y remodelarla a su gusto. Construida en dos niveles, 3 habitaciones con opción a una cuarta, 2 baños completos, 2 terrazas, 3 lugares de estacionamiento. Amplios espacios. Ubicada a una calle de Av. Ermita, muy cerca de Río Churubusco y Eje 3.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    </div>
+                    <small class="text-muted">9 mins</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col">
+              <div class="card shadow-sm">
+                <img src="IMG/c4.jpg" width="100%" height="225">
+                <div class="card-body">
+                  <p class="card-text">En esquina totalmente Remodelada, frente a calle con camellón
+                    Excelente propiedad totalmente remodelada con amplios y cómodos espacios, muy buena luz natural, a tres cuadras de Av Taxqueña y a un paso de Canal de Miramontes, Metro Taxqueña. Todos los servicios a la mano.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    </div>
+                    <small class="text-muted">9 mins</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>     
+        </div>
+    </div>
+
+    <div class="album py-5 ">
+        <div class="container">
+    
+          <div class="row">
+            <div class="col">
+              <div class="card shadow-sm">
+                <img src="IMG/c5.jpg" width="100%" height="225">
+                <div class="card-body">
+                  <p class="card-text">Casa ampliada lista para ser habitada. Cuenta con dos niveles de construcción. Ventiladores en cada espacio de la casa y cortinas anticiclónicas.
+                    Primer nivel encuentras: estacionamiento techado, con dos puertas de acceso a la casa, sala comedor muy amplio con aire acondicionado, una recamara con aire acondicionado, baño completo, cocina integral ...</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    </div>
+                    <small class="text-muted">9 mins</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col">
+              <div class="card shadow-sm">
+                <img src="IMG/c6.jpg" width="100%" height="225">
+                <div class="card-body">
+                  <p class="card-text">Amplia casa de dos niveles cuatro recamaras cada una con closet, una pequeña terraza techada, dos baños completos en la planta baja y segundo nivel, uno de sus estacionamientos es techado pero tiene una segunda entrada en donde se pueden estacionar dos autos en batería, por la distribución de la casa recibe mucha luz natural, cuenta con sala comedor y cocina integral, área de lavado.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    </div>
+                    <small class="text-muted">9 mins</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col">
+              <div class="card shadow-sm">
+                <img src="IMG/c8.jpg" width="100%" height="225">
+                <div class="card-body">
+                  <p class="card-text">Casa habitación de 2 niveles con una superficie de 119m2 con medidas de 7 de frente por 17 de fondo, 180 m2 de construcción, cochera techada para 2 autos, 3 habitaciones en planta alta, preparación para closets y espacio de walking closets, balcón, espacio de sala, comedor, y cocina, 2 baños y medio y patio de servicio.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    </div>
+                    <small class="text-muted">9 mins</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>     
+        </div>
+    </div>
+        
+
+    </main>
+
+    <footer class="mainfooter" role="contentinfo">
+        <div class="footer-middle">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3 col-sm-6">
+              <!--Column1-->
+              <div class="footer-pad">
+                
+                <p> Inmob<strong>ITT</strong>
+                </p>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+              <!--Column1-->
+              <div class="footer-pad">
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+              <h4></h4>
+              <p> </p>
+            </div>
+            <div class="col-md-3">
+                  <ul class="social-network social-circle">
+                   <li><a href="" class="icoFacebook" title="Facebook" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                   <li><a href="" class="icoWhats" title="Whats" target="_blank"><i class="fa fa-whatsapp"></i></a></li>
+                   <li><a href="" class="icoInsta" title="instagram" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                  </ul>		
+          </div>
+          </div>
+        <div class="row">
+          <div class="col-md-12 copy">
+            <p class="text-center">&copy; Derechos reservados S. A. de C. V. - © 2022 Copyright.</p>
+          </div>
+        </div>
+      
+      
+        </div>
+        </div>
+      </footer>
+</body>
+</html>

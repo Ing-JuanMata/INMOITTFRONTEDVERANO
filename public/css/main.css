@@ -1,0 +1,45 @@
+html{
+    background-color: #E9FFF9;
+}
+
+a{
+    color: black;
+    text-decoration: none;
+}
+
+.navbar{
+    margin-bottom: 0;
+}
+
+.body{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    margin:0;
+}
+
+h2{
+    color:white;
+}
+
+.tiporustico, .tipourbano{
+    
+    font-family: 'Arima', cursive;
+    font-size: x-large;
+    color: black; 
+    text-decoration:solid;
+}
+
+.inmueble figcaption {
+    color: black;
+}
+
+.inmueble:hover{
+    background-color: #467599;
+    
+}
+
+.inmueble:hover figcaption{
+    color:white;
+}
+

@@ -1,0 +1,35 @@
+:root {
+  --principal: #1d3354;
+  --secundario: #467599;
+  --terciario: #9ed8db;
+  --fondo: #e9fff9;
+  --advertencia: #d64045;
+}
+
+html {
+  box-sizing: border-box;
+  background-color: var(--fondo);
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+.bg-dark {
+  background-color: var(--principal) !important;
+}
+
+a {
+  text-decoration: none;
+  color: var(--principal);
+}
+
+.categoria {
+  display: inline-block;
+  padding: 5px 20px;
+}
+
+.seleccionada {
+  border-bottom: 3px solid var(--principal);
+}
