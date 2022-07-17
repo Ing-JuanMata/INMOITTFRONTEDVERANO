@@ -134,7 +134,7 @@ const postCodigoPostal = (req, res) => {
   const conn = conectar();
   conn.execute(
     "INSERT INTO codigo_postal(asentamiento, codigo_postal) VALUES (?, ?)",
-    [req.body.asentamiento, req.body.codigo],
+    [req.body.asentamiento, req.body.codigoPostal],
     (err, results, fields) => {
       if (err) throw err;
       res.send(results);
@@ -143,4 +143,133 @@ const postCodigoPostal = (req, res) => {
   conn.end();
 };
 
-module.exports = { postCuenta, postCliente };
+const postAdeudo = (req, res) => {
+  const conn = conectar();
+  conn.execute(
+    "INSERT INTO adeudo(nombre) VALUES (?)",
+    [req.body.nombre],
+    (err, results, fields) => {
+      if (err) throw err;
+      res.send(results);
+    }
+  );
+  conn.end();
+};
+
+const postServicio = (req, res) => {
+  const conn = conectar();
+  conn.execute(
+    "INSERT INTO servicio(nombre) VALUES (?)",
+    [req.body.nombre],
+    (err, results, fields) => {
+      if (err) throw err;
+      res.send(results);
+    }
+  );
+  conn.end();
+};
+
+const postInmueble = (req, res) => {
+  const conn = conectar();
+  conn.execute(
+    "INSERT INTO inmueble(titulo, precio_venta, precio_renta, cuartos, pisos, area, direccion, idcodigo_postal) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+    [
+      req.body.titulo,
+      req.body.precioVenta,
+      req.body.precioRenta,
+      req.body.cuartos,
+      req.body.pisos,
+      req.body.area,
+      req.body.direccion,
+      req.body.codigoPostal,
+    ],
+    (err, results, fields) => {
+      if (err) throw err;
+      res.send(results);
+    }
+  );
+  conn.end();
+};
+
+const postAdeudoInmueble = (req, res) => {
+  const conn = conectar();
+  conn.execute(
+    "INSERT INTO adeudos_inmueble VALUES (?, ?, ?)",
+    [req.body.idAdeudo, req.body.idInmueble, req.body.cantidad],
+    (err, results, fields) => {
+      if (err) throw err;
+      res.send(results);
+    }
+  );
+  conn.end();
+};
+
+const postServicioInmueble = (req, res) => {
+  const conn = conectar();
+  conn.execute(
+    "INSERT INTO servicio_inmueble VALUES (?, ?)",
+    [req.body.idInmueble, req.body.idServicio],
+    (err, results, fields) => {
+      if (err) throw err;
+      res.send(results);
+    }
+  );
+  conn.end();
+};
+
+const postProyectoGerente = (req, res) => {
+  const conn = conectar();
+  conn.execute(
+    "INSERT INTO proyectos_gerente VALUES (?, ?)",
+    [req.body.idInmueble, req.body.idGerente],
+    (err, results, fields) => {
+      if (err) throw err;
+      res.send(results);
+    }
+  );
+  conn.end();
+};
+
+const postInmuebleValuador = (req, res) => {
+  const conn = conectar();
+  conn.execute(
+    "INSERT INTO inmueble_valuador VALUES (?, ?)",
+    [req.body.idInmueble, req.body.idValuador],
+    (err, results, fields) => {
+      if (err) throw err;
+      res.send(results);
+    }
+  );
+  conn.end();
+};
+
+const postInmuebleAgente = (req, res) => {
+  const conn = conectar();
+  conn.execute(
+    "INSERT INTO inmueble_agente VALUES (?, ?)",
+    [req.body.idInmueble, req.body.idAgente],
+    (err, results, fields) => {
+      if (err) throw err;
+      res.send(results);
+    }
+  );
+  conn.end();
+};
+
+module.exports = {
+  postCuenta,
+  postCliente,
+  postGerenteProyectos,
+  postAdministrador,
+  postValuador,
+  postAgenteVentas,
+  postCodigoPostal,
+  postAdeudo,
+  postServicio,
+  postInmueble,
+  postAdeudoInmueble,
+  postServicioInmueble,
+  postProyectoGerente,
+  postInmuebleValuador,
+  postInmuebleAgente,
+};

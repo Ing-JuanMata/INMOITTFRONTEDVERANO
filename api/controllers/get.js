@@ -123,7 +123,7 @@ const getProyectosAgente = (req, res) => {
 const getInmuebles = (req, res) => {
   const conn = conectar();
   conn.query(
-    `SELECT i.idinmueble, i.titulo, i.precio_venta, i.precio_renta, i.cuartos, i.pisos, i.area, i.direccion, cp.idcodigo_postal, cp.asentamiento, cp.codigo_postal FROM inmueble i INNER JOIN codigo_postal cp ON i.idcodigo_postal = cp.idcodigo_postal`,
+    `SELECT i.idinmueble, i.titulo, i.precio_venta, i.precio_renta, i.direccion, cp.asentamiento, cp.codigo_postal FROM inmueble i INNER JOIN codigo_postal cp ON i.idcodigo_postal = cp.idcodigo_postal`,
     (err, results, fields) => {
       res.json(results);
     }
@@ -153,7 +153,7 @@ const getServicios = (req, res) => {
 const getServiciosInmueble = (req, res) => {
   const conn = conectar();
   conn.query(
-    `SELECT s.idServicio, s.nombre FROM servicio_inmueble si INNER JOIN servicio s ON s.idServicio INNER JOIN inmueble i WHERE i.idinmueble = si.idinmueble WHERE si.idinmueble = ${req.params.idInmueble}`,
+    `SELECT si.idServicio, s.nombre FROM servicio_inmueble si INNER JOIN servicio s ON s.idServicio = si.idServicio INNER JOIN inmueble i ON i.idinmueble = si.idinmueble WHERE si.idinmueble = ${req.params.idInmueble}`,
     (err, results, fields) => {
       res.json(results);
     }
@@ -210,6 +210,14 @@ const getInmueblesEvaluador = (req, res) => {
   conn.end();
 };
 
+const getCodigoPostal = (req, res) => {
+  const conn = conectar();
+  conn.query(`SELECT * FROM codigo_postal`, (err, results, fields) => {
+    res.json(results);
+  });
+  conn.end();
+};
+
 module.exports = {
   getCuentas,
   getCuenta,
@@ -232,4 +240,5 @@ module.exports = {
   getValuadores,
   getValuador,
   getInmueblesEvaluador,
+  getCodigoPostal,
 };
