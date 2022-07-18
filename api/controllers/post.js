@@ -7,8 +7,8 @@ const postCuenta = (req, res) => {
     "INSERT INTO cuenta VALUES (?, ?)",
     [req.body.correo, req.body.password],
     (err, results, fields) => {
-      if (err) throw err;
-      res.send(results);
+      if (err) res.json({ err });
+      res.json({ results });
     }
   );
   conn.end();
@@ -28,8 +28,8 @@ const postCliente = (req, res) => {
       "INSERT INTO cliente(nombre, apellido, telefono, correo) VALUES (?, ?, ?, ?)",
       [req.body.nombre, req.body.apellido, req.body.telefono, req.body.correo],
       (err, results, fields) => {
-        if (err) throw err;
-        res.send(results);
+        if (err) res.json({ err });
+        res.json({ results });
       }
     );
     conn.end();
@@ -56,8 +56,8 @@ const postGerenteProyectos = (req, res) => {
         req.body.correo,
       ],
       (err, results, fields) => {
-        if (err) throw err;
-        res.send(results);
+        if (err) res.json({ err });
+        res.json({ results });
       }
     );
     conn.end();
@@ -78,8 +78,8 @@ const postAdministrador = (req, res) => {
       "INSERT INTO administrador(nombre, correo) VALUES (?, ?)",
       [req.body.nombre, req.body.correo],
       (err, results, fields) => {
-        if (err) throw err;
-        res.send(results);
+        if (err) res.json({ err });
+        res.json({ results });
       }
     );
     conn.end();
@@ -100,8 +100,8 @@ const postValuador = (req, res) => {
       "INSERT INTO valuador(nombre, apellido, telefono, correo) VALUES (?, ?, ?, ?)",
       [req.body.nombre, req.body.apellido, req.body.telefono, req.body.correo],
       (err, results, fields) => {
-        if (err) throw err;
-        res.send(results);
+        if (err) res.json({ err });
+        res.json({ results });
       }
     );
     conn.end();
@@ -122,8 +122,8 @@ const postAgenteVentas = (req, res) => {
       "INSERT INTO agente_ventas(nombre, apellido, telefono, correo) VALUES (?, ?, ?, ?)",
       [req.body.nombre, req.body.apellido, req.body.telefono, req.body.correo],
       (err, results, fields) => {
-        if (err) throw err;
-        res.send(results);
+        if (err) res.json({ err });
+        res.json({ results });
       }
     );
     conn.end();
@@ -136,8 +136,8 @@ const postCodigoPostal = (req, res) => {
     "INSERT INTO codigo_postal(asentamiento, codigo_postal) VALUES (?, ?)",
     [req.body.asentamiento, req.body.codigoPostal],
     (err, results, fields) => {
-      if (err) throw err;
-      res.send(results);
+      if (err) res.json({ err });
+      res.json({ results });
     }
   );
   conn.end();
@@ -149,8 +149,8 @@ const postAdeudo = (req, res) => {
     "INSERT INTO adeudo(nombre) VALUES (?)",
     [req.body.nombre],
     (err, results, fields) => {
-      if (err) throw err;
-      res.send(results);
+      if (err) res.json({ err });
+      res.json({ results });
     }
   );
   conn.end();
@@ -162,8 +162,8 @@ const postServicio = (req, res) => {
     "INSERT INTO servicio(nombre) VALUES (?)",
     [req.body.nombre],
     (err, results, fields) => {
-      if (err) throw err;
-      res.send(results);
+      if (err) res.json({ err });
+      res.json({ results });
     }
   );
   conn.end();
@@ -184,8 +184,8 @@ const postInmueble = (req, res) => {
       req.body.codigoPostal,
     ],
     (err, results, fields) => {
-      if (err) throw err;
-      res.send(results);
+      if (err) res.json({ err });
+      res.json({ results });
     }
   );
   conn.end();
@@ -197,8 +197,8 @@ const postAdeudoInmueble = (req, res) => {
     "INSERT INTO adeudos_inmueble VALUES (?, ?, ?)",
     [req.body.idAdeudo, req.body.idInmueble, req.body.cantidad],
     (err, results, fields) => {
-      if (err) throw err;
-      res.send(results);
+      if (err) res.json({ err });
+      res.json({ results });
     }
   );
   conn.end();
@@ -210,8 +210,8 @@ const postServicioInmueble = (req, res) => {
     "INSERT INTO servicio_inmueble VALUES (?, ?)",
     [req.body.idInmueble, req.body.idServicio],
     (err, results, fields) => {
-      if (err) throw err;
-      res.send(results);
+      if (err) res.json({ err });
+      res.json({ results });
     }
   );
   conn.end();
@@ -223,8 +223,8 @@ const postProyectoGerente = (req, res) => {
     "INSERT INTO proyectos_gerente VALUES (?, ?)",
     [req.body.idInmueble, req.body.idGerente],
     (err, results, fields) => {
-      if (err) throw err;
-      res.send(results);
+      if (err) res.json({ err });
+      res.json({ results });
     }
   );
   conn.end();
@@ -236,8 +236,8 @@ const postInmuebleValuador = (req, res) => {
     "INSERT INTO inmueble_valuador VALUES (?, ?)",
     [req.body.idInmueble, req.body.idValuador],
     (err, results, fields) => {
-      if (err) throw err;
-      res.send(results);
+      if (err) res.json({ err });
+      res.json({ results });
     }
   );
   conn.end();
@@ -249,8 +249,8 @@ const postInmuebleAgente = (req, res) => {
     "INSERT INTO inmueble_agente VALUES (?, ?)",
     [req.body.idInmueble, req.body.idAgente],
     (err, results, fields) => {
-      if (err) throw err;
-      res.send(results);
+      if (err) res.json({ err });
+      res.json({ results });
     }
   );
   conn.end();

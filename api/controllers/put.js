@@ -8,7 +8,10 @@ const putCliente = (req, res) => {
     [req.body.nombre, req.body.apellido, req.body.telefono, req.body.correo],
     (err, results, fields) => {
       if (err) res.json({ err });
-      if (req.body.correo === req.body.correoN) res.json({ results });
+      if (req.body.correo === req.body.correoN) {
+        res.json({ results });
+        return;
+      }
       fetch("http://localhost/data/cuenta", {
         method: "POST",
         body: JSON.stringify({
@@ -29,7 +32,10 @@ const putCliente = (req, res) => {
               }),
               headers: { "Content-Type": "application/json" },
             }).then(() => {
-              res.json({ results });
+              {
+                res.json({ results });
+                return;
+              }
             });
           }
         );
@@ -52,7 +58,10 @@ const putGerente = (req, res) => {
     ],
     (err, results, fields) => {
       if (err) res.json({ err });
-      if (req.body.correo === req.body.correoN) res.json({ results });
+      if (req.body.correo === req.body.correoN) {
+        res.json({ results });
+        return;
+      }
       fetch("http://localhost/data/cuenta", {
         method: "POST",
         body: JSON.stringify({
@@ -73,7 +82,10 @@ const putGerente = (req, res) => {
               }),
               headers: { "Content-Type": "application/json" },
             }).then(() => {
-              res.json({ results });
+              {
+                res.json({ results });
+                return;
+              }
             });
           }
         );
@@ -90,7 +102,10 @@ const putAdministrador = (req, res) => {
     [req.body.nombre, req.body.correo],
     (err, results, fields) => {
       if (err) res.json({ err });
-      if (req.body.correo === req.body.correoN) res.json({ results });
+      if (req.body.correo === req.body.correoN) {
+        res.json({ results });
+        return;
+      }
       fetch("http://localhost/data/cuenta", {
         method: "POST",
         body: JSON.stringify({
@@ -111,7 +126,10 @@ const putAdministrador = (req, res) => {
               }),
               headers: { "Content-Type": "application/json" },
             }).then(() => {
-              res.json({ results });
+              {
+                res.json({ results });
+                return;
+              }
             });
           }
         );
@@ -128,7 +146,10 @@ const putValuador = (req, res) => {
     [req.body.nombre, req.body.apellido, req.body.telefono, req.body.correo],
     (err, results, fields) => {
       if (err) res.json({ err });
-      if (req.body.correo === req.body.correoN) res.json({ results });
+      if (req.body.correo === req.body.correoN) {
+        res.json({ results });
+        return;
+      }
       fetch("http://localhost/data/cuenta", {
         method: "POST",
         body: JSON.stringify({
@@ -149,7 +170,10 @@ const putValuador = (req, res) => {
               }),
               headers: { "Content-Type": "application/json" },
             }).then(() => {
-              res.json({ results });
+              {
+                res.json({ results });
+                return;
+              }
             });
           }
         );
@@ -166,7 +190,10 @@ const putAgente = (req, res) => {
     [req.body.nombre, req.body.apellido, req.body.telefono, req.body.correo],
     (err, results, fields) => {
       if (err) res.json({ err });
-      if (req.body.correo === req.body.correoN) res.json({ results });
+      if (req.body.correo === req.body.correoN) {
+        res.json({ results });
+        return;
+      }
       fetch("http://localhost/data/cuenta", {
         method: "POST",
         body: JSON.stringify({
@@ -187,7 +214,10 @@ const putAgente = (req, res) => {
               }),
               headers: { "Content-Type": "application/json" },
             }).then(() => {
-              res.json({ results });
+              {
+                res.json({ results });
+                return;
+              }
             });
           }
         );
