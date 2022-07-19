@@ -1,6 +1,5 @@
 const conectar = require("./conexion");
 
-/** Obtiene las cuentas de correo almacenadas en la base de datos */
 const getCuentas = (req, res) => {
   const conn = conectar();
   conn.query(`SELECT correo FROM cuenta`, (err, results, fields) => {
@@ -13,9 +12,6 @@ const getCuentas = (req, res) => {
   conn.end();
 };
 
-/** Obtiene la contraseña de la cuenta solicitada
- * correo: cuenta de correo de la que se quiere obtener la contraseña
- */
 const getCuenta = (req, res) => {
   const conn = conectar();
   conn.query(
@@ -32,7 +28,6 @@ const getCuenta = (req, res) => {
   conn.end();
 };
 
-/** Obtiene los clientes registrados en la base de datos */
 const getClientes = (req, res) => {
   const conn = conectar();
   conn.query(`SELECT * FROM cliente`, (err, results, fields) => {
@@ -45,7 +40,6 @@ const getClientes = (req, res) => {
   conn.end();
 };
 
-/** Obtiene toda la información sobre el cliente solicitado */
 const getCliente = (req, res) => {
   const conn = conectar();
   conn.execute(
@@ -62,7 +56,6 @@ const getCliente = (req, res) => {
   conn.end();
 };
 
-/** Obtiene los nombres de los gerentes de proyecto registrados */
 const getGerentesProyectos = (req, res) => {
   const conn = conectar();
   conn.query(
@@ -78,9 +71,6 @@ const getGerentesProyectos = (req, res) => {
   conn.end();
 };
 
-/** Obtiene todos los datos de un determinado Gerente de proyectos
- * idGerente: id del gerente de proyectos buscado
- */
 const getGerenteProyectos = (req, res) => {
   const conn = conectar();
   conn.execute(
@@ -97,9 +87,6 @@ const getGerenteProyectos = (req, res) => {
   conn.end();
 };
 
-/** Obtiene los proyectos de un determinado gerente de proyectos
- * idGerente: El id del gerente de proyectos buscado
- */
 const getProyectosGerente = (req, res) => {
   const conn = conectar();
   conn.query(
@@ -116,7 +103,6 @@ const getProyectosGerente = (req, res) => {
   conn.end();
 };
 
-/** Obtiene las cuentras de los administradores */
 const getAdministradores = (req, res) => {
   const conn = conectar();
   conn.query(`SELECT * FROM administrador`, (err, results, fields) => {
@@ -129,9 +115,6 @@ const getAdministradores = (req, res) => {
   conn.end();
 };
 
-/** Obtiene la información de un administrador determinado
- * idAdministrador: El id del administrador buscado
- */
 const getAdministrador = (req, res) => {
   const conn = conectar();
   conn.execute(
@@ -148,7 +131,6 @@ const getAdministrador = (req, res) => {
   conn.end();
 };
 
-/** Obtiene las cuentras de los agentes de ventas */
 const getAgentesVentas = (req, res) => {
   const conn = conectar();
   conn.query(`SELECT * FROM agente_ventas`, (err, results, fields) => {
@@ -161,9 +143,6 @@ const getAgentesVentas = (req, res) => {
   conn.end();
 };
 
-/** Obtiene la información de un agente de ventas determinado
- * idAgente: El id del agente de ventas buscado
- */
 const getAgenteVentas = (req, res) => {
   const conn = conectar();
   conn.execute(
@@ -180,9 +159,6 @@ const getAgenteVentas = (req, res) => {
   conn.end();
 };
 
-/** Obtiene los proyectos asociados a un agente de ventas
- * idAgente: El id del agente de ventas buscado
- */
 const getProyectosAgente = (req, res) => {
   const conn = conectar();
   conn.execute(
@@ -199,7 +175,6 @@ const getProyectosAgente = (req, res) => {
   conn.end();
 };
 
-/** Devuelve la información basica de los inmuebles (proyectos) */
 const getInmuebles = (req, res) => {
   const conn = conectar();
   conn.query(
@@ -215,9 +190,6 @@ const getInmuebles = (req, res) => {
   conn.end();
 };
 
-/** Obtiene toda la informacion de un inmueble
- * idInmueble: id del inmueble buscado
- */
 const getInmueble = (req, res) => {
   const conn = conectar();
   conn.execute(
@@ -234,7 +206,6 @@ const getInmueble = (req, res) => {
   conn.end();
 };
 
-/** Obtiene todos lo servicios */
 const getServicios = (req, res) => {
   const conn = conectar();
   conn.query(`SELECT * FROM servicio`, (err, results, fields) => {
@@ -247,9 +218,6 @@ const getServicios = (req, res) => {
   conn.end();
 };
 
-/** Obtiene los servicios de un determinado inmueble
- * idInmueble: id del inmueble buscado
- */
 const getServiciosInmueble = (req, res) => {
   const conn = conectar();
   conn.execute(
@@ -266,7 +234,6 @@ const getServiciosInmueble = (req, res) => {
   conn.end();
 };
 
-/** Obtiene la lista de adeudos */
 const getAdeudos = (req, res) => {
   const conn = conectar();
   conn.query(`SELECT * FROM adeudo`, (err, results, fields) => {
@@ -279,9 +246,6 @@ const getAdeudos = (req, res) => {
   conn.end();
 };
 
-/** Obtiene los adeudos de un inmueble determinado
- * idInmueble: id del inmueble buscado
- */
 const getAdeudosInmueble = (req, res) => {
   const conn = conectar();
   conn.query(
@@ -297,7 +261,6 @@ const getAdeudosInmueble = (req, res) => {
   conn.end();
 };
 
-/** Obtiene toda la informacion sobre los Valuadores */
 const getValuadores = (req, res) => {
   const conn = conectar();
   conn.query(`SELECT * FROM valuador`, (err, results, fields) => {
@@ -310,9 +273,6 @@ const getValuadores = (req, res) => {
   conn.end();
 };
 
-/** Obtiene la informacion de un determinado Valuador
- * idValuador: id del valuador buscado
- */
 const getValuador = (req, res) => {
   const conn = conectar();
   conn.query(
@@ -329,9 +289,6 @@ const getValuador = (req, res) => {
   conn.end();
 };
 
-/** Obtiene los inmuebles asociados a un determinado Valuador
- * idValuador: id del valuador buscado
- */
 const getInmueblesEvaluador = (req, res) => {
   const conn = conectar();
   conn.execute(
@@ -348,7 +305,6 @@ const getInmueblesEvaluador = (req, res) => {
   conn.end();
 };
 
-/** Obtiene los codigos postales */
 const getCodigoPostal = (req, res) => {
   const conn = conectar();
   conn.query(`SELECT * FROM codigo_postal`, (err, results, fields) => {

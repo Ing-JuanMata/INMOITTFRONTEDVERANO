@@ -10,17 +10,17 @@ router.get("/cuentas", getControllers.getCuentas);
 router.get("/cuentas/:correo", getControllers.getCuenta);
 router.get("/clientes", getControllers.getClientes);
 router.get("/clientes/:idCliente", getControllers.getCliente);
-router.get("/gerentesproyectos", getControllers.getGerentesProyectos);
-router.get("/gerentesproyectos/:idGerente", getControllers.getGerenteProyectos);
-router.get("/proyectosgerente/:idGerente", getControllers.getProyectosGerente);
+router.get("/gerentes", getControllers.getGerentesProyectos);
+router.get("/gerentes/:idGerente", getControllers.getGerenteProyectos);
+router.get("/proyectos/:idGerente", getControllers.getProyectosGerente);
 router.get("/administradores", getControllers.getAdministradores);
 router.get(
   "/administradores/:idAdministrador",
   getControllers.getAdministrador
 );
-router.get("/agentesventas", getControllers.getAgentesVentas);
-router.get("/agentesventas/:idAgente", getControllers.getAgenteVentas);
-router.get("/proyectosagente/:idAgente", getControllers.getProyectosAgente);
+router.get("/agentes", getControllers.getAgentesVentas);
+router.get("/agentes/:idAgente", getControllers.getAgenteVentas);
+router.get("/inmueblesAgente/:idAgente", getControllers.getProyectosAgente);
 router.get("/inmuebles", getControllers.getInmuebles);
 router.get("/inmuebles/:idInmueble", getControllers.getInmueble);
 router.get("/servicios", getControllers.getServicios);
@@ -31,7 +31,7 @@ router.get("/cp", getControllers.getCodigoPostal);
 router.get("/valuadores", getControllers.getValuadores);
 router.get("/valuadores/:idValuador", getControllers.getValuador);
 router.get(
-  "/proyectosvaluador/:idValuador",
+  "/inmueblesValuador/:idValuador",
   getControllers.getInmueblesEvaluador
 );
 

@@ -1,7 +1,6 @@
 const conectar = require("./conexion");
 const fetch = require("node-fetch");
 
-/** nombre, apellido, telefono, correo */
 const putCliente = (req, res) => {
   const conn = conectar();
   conn.execute(
@@ -10,7 +9,7 @@ const putCliente = (req, res) => {
       req.body.nombre,
       req.body.apellido,
       req.body.telefono,
-      req.body.correo,
+      req.body.correoN,
       req.body.correo,
     ],
     (err, results, fields) => {
@@ -24,16 +23,16 @@ const putCliente = (req, res) => {
   conn.end();
 };
 
-/** nombre, telefono, direccion, codigoPostal, correo */
 const putGerente = (req, res) => {
   const conn = conectar();
   conn.execute(
-    "UPDATE gerente_proyectos SET nombre = ?, telefono = ?, direccion = ?, idcodigo_postal = ? WHERE correo = ?",
+    "UPDATE gerente_proyectos SET nombre = ?, telefono = ?, direccion = ?, idcodigo_postal = ?, correo = ? WHERE correo = ?",
     [
       req.body.nombre,
       req.body.telefono,
       req.body.direccion,
       req.body.codigoPostal,
+      req.body.correoN,
       req.body.correo,
     ],
     (err, results, fields) => {
@@ -46,12 +45,11 @@ const putGerente = (req, res) => {
   );
 };
 
-/** nombre, correo */
 const putAdministrador = (req, res) => {
   const conn = conectar();
   conn.execute(
-    "UPDATE administrador SET nombre = ? WHERE correo = ?",
-    [req.body.nombre, req.body.correo],
+    "UPDATE administrador SET nombre = ?, correo = ? WHERE correo = ?",
+    [req.body.nombre, req.body.correoN, req.body.correo],
     (err, results, fields) => {
       if (err) {
         res.json({ err });
@@ -62,12 +60,17 @@ const putAdministrador = (req, res) => {
   );
 };
 
-/** nombre, apellido, telefono, correo */
 const putValuador = (req, res) => {
   const conn = conectar();
   conn.execute(
-    "UPDATE valuador SET nombre = ?, apellido = ?, telefono = ? WHERE correo = ?",
-    [req.body.nombre, req.body.apellido, req.body.telefono, req.body.correo],
+    "UPDATE valuador SET nombre = ?, apellido = ?, telefono = ?, correo = ? WHERE correo = ?",
+    [
+      req.body.nombre,
+      req.body.apellido,
+      req.body.telefono,
+      req.body.correoN,
+      req.body.correo,
+    ],
     (err, results, fields) => {
       if (err) {
         res.json({ err });
@@ -78,12 +81,17 @@ const putValuador = (req, res) => {
   );
 };
 
-/** nombre, apellido, telefono, correo */
 const putAgente = (req, res) => {
   const conn = conectar();
   conn.execute(
-    "UPDATE agente_ventas SET nombre = ?, apellido = ?, telefono = ? WHERE correo = ?",
-    [req.body.nombre, req.body.apellido, req.body.telefono, req.body.correo],
+    "UPDATE agente_ventas SET nombre = ?, apellido = ?, telefono = ?, correo = ? WHERE correo = ?",
+    [
+      req.body.nombre,
+      req.body.apellido,
+      req.body.telefono,
+      req.body.correoN,
+      req.body.correo,
+    ],
     (err, results, fields) => {
       if (err) {
         res.json({ err });
@@ -94,7 +102,6 @@ const putAgente = (req, res) => {
   );
 };
 
-/** asentamiento, codigoPostal, idCodigoPostal */
 const putCodigoPostal = (req, res) => {
   const conn = conectar();
   conn.execute(
@@ -110,7 +117,6 @@ const putCodigoPostal = (req, res) => {
   );
 };
 
-/** nombre, idAdeudo */
 const putAdeudo = (req, res) => {
   const conn = conectar();
   conn.execute(
@@ -126,7 +132,6 @@ const putAdeudo = (req, res) => {
   );
 };
 
-/** nombre, idServicio */
 const putServicio = (req, res) => {
   const conn = conectar();
   conn.execute(
@@ -142,7 +147,6 @@ const putServicio = (req, res) => {
   );
 };
 
-/** titulo, precioVenta, precioRenta, cuartos, pisos, area, direccion, codigoPostal, idInmueble */
 const putInmueble = (req, res) => {
   const conn = conectar();
   conn.execute(
@@ -168,7 +172,6 @@ const putInmueble = (req, res) => {
   );
 };
 
-/** cantidad, idInmueble, idAdeudo */
 const putAdeudoInmueble = (req, res) => {
   const conn = conectar();
   conn.execute(

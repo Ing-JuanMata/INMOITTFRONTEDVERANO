@@ -1,9 +1,6 @@
 const conectar = require("./conexion");
 const fetch = require("node-fetch");
 
-/** Elimina una cuenta de cliente
- * correo:
- */
 const deleteCliente = (req, res) => {
   const conn = conectar();
   conn.execute(
@@ -20,9 +17,6 @@ const deleteCliente = (req, res) => {
   conn.end();
 };
 
-/** Elimina una cuenta de administrador
- * correo:
- */
 const deleteAdministrador = (req, res) => {
   const conn = conectar();
   conn.execute(
@@ -39,9 +33,6 @@ const deleteAdministrador = (req, res) => {
   conn.end();
 };
 
-/** Elimina una cuenta de gerente de proyectos
- * correo:
- */
 const deleteGerente = (req, res) => {
   const conn = conectar();
   conn.execute(
@@ -58,9 +49,6 @@ const deleteGerente = (req, res) => {
   conn.end();
 };
 
-/** Elimina una cuenta de valuador
- * correo:
- */
 const deleteValuador = (req, res) => {
   const conn = conectar();
   conn.execute(
@@ -77,9 +65,6 @@ const deleteValuador = (req, res) => {
   conn.end();
 };
 
-/** Elimina una cuenta de agente de ventas
- * correo:
- */
 const deleteAgente = (req, res) => {
   const conn = conectar();
   conn.execute(
@@ -96,9 +81,6 @@ const deleteAgente = (req, res) => {
   conn.end();
 };
 
-/** Elimina un tipo de adeudo
- * idAdeudo:
- */
 const deleteAdeudo = (req, res) => {
   const conn = conectar();
   conn.execute(
@@ -112,10 +94,6 @@ const deleteAdeudo = (req, res) => {
   conn.end();
 };
 
-/** Elimina un adeudo de un inmueble
- * idAdeudo:
- * idInmueble;
- */
 const deleteAdeudoInmueble = (req, res) => {
   const conn = conectar();
   conn.execute(
@@ -132,9 +110,6 @@ const deleteAdeudoInmueble = (req, res) => {
   conn.end();
 };
 
-/** Elimina un servicio
- * idServicio:
- */
 const deleteServicio = (req, res) => {
   const conn = conectar();
   conn.execute(
@@ -151,10 +126,6 @@ const deleteServicio = (req, res) => {
   conn.end();
 };
 
-/** Elimina un servicio de un inmueble
- * idServicio:
- * idInmueble:
- */
 const deleteServicioInmueble = (req, res) => {
   const conn = conectar();
   conn.execute(
@@ -171,7 +142,6 @@ const deleteServicioInmueble = (req, res) => {
   conn.end();
 };
 
-/** Elimina un inmueble */
 const deleteInmueble = (req, res) => {
   const conn = conectar();
   conn.execute(
@@ -187,16 +157,12 @@ const deleteInmueble = (req, res) => {
   );
 };
 
-/** Elimina en enlace de inmueble/valuador
- * idInmueble:
- * idValuador:
- */
 const deleteInmuebleValuador = (req, res) => {
   const conn = conectar();
   conn.execute(
     "DELETE FROM inmueble_valuador WHERE idinmueble = ? AND idvaluador = ?",
-    [req.params.idInmueble, req.params.idValuador],
-    (err, result, fields) => {
+    [req.body.idInmueble, req.body.idValuador],
+    (err, results, fields) => {
       if (err) {
         res.json({ err });
         return;
@@ -206,16 +172,12 @@ const deleteInmuebleValuador = (req, res) => {
   );
 };
 
-/** Elimina en enlace de inmueble/agente
- * idInmueble:
- * idAgente:
- */
 const deleteInmuebleAgente = (req, res) => {
   const conn = conectar();
   conn.execute(
     "DELETE FROM inmueble_agente WHERE idinmueble = ? AND idagente_ventas = ?",
-    [req.params.idInmueble, req.params.idAgente],
-    (err, result, fields) => {
+    [req.body.idInmueble, req.body.idAgente],
+    (err, results, fields) => {
       if (err) {
         res.json({ err });
         return;
