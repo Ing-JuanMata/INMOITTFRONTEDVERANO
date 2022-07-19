@@ -53,7 +53,6 @@ router.post("/valuadorInmueble", postControllers.postInmuebleValuador);
 router.post("/agenteInmueble", postControllers.postInmuebleAgente);
 
 //DELETE
-router.delete("/cuenta", deleteControllers.deleteCuenta);
 router.delete("/cliente", deleteControllers.deleteCliente);
 router.delete("/administrador", deleteControllers.deleteAdministrador);
 router.delete("/gerente", deleteControllers.deleteGerente);
@@ -64,6 +63,8 @@ router.delete("/adeudoInmueble", deleteControllers.deleteAdeudoInmueble);
 router.delete("/servicio", deleteControllers.deleteServicio);
 router.delete("/servicioInmueble", deleteControllers.deleteServicioInmueble);
 router.delete("/inmueble", deleteControllers.deleteInmueble);
+router.delete("/inmuebleValuador", deleteControllers.deleteInmuebleValuador);
+router.delete("/inmuebleAgente", deleteControllers.deleteInmuebleAgente);
 
 //PUT
 router.put("/cliente", putCotrollers.putCliente);
