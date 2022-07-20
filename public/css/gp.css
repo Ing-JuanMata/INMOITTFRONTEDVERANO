@@ -25,11 +25,4 @@ a {
   color: var(--principal);
 }
 
-.categoria {
-  display: inline-block;
-  padding: 5px 20px;
-}
 
-.seleccionada {
-  border-bottom: 3px solid var(--principal);
-}

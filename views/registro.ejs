@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InmobITT</title>
+  <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-dark bg-dark px-5">
+      <a href="/">
+        <h1 style="color: white;">Inmob<strong>ITT </strong></h1>
+      </a>
+      <h5 style="align-self: left; color: white;">Registro</h5>
+    </nav>
+  </header>
+
+  <main class="container pt-5">
+    <div class="row">
+      <form class="col-3" id="frmCliente">
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre:</label>
+          <input type="text" class="form-control" id="nombre" required>
+        </div>
+        <div class="mb-3">
+          <label for="apellido" class="form-label">Apellidos:</label>
+          <input type="text" class="form-control" id="apellido" required>
+        </div>
+        <div class="mb-3">
+          <label for="telefono" class="form-label">Telefono:</label>
+          <input type="number" class="form-control" id="telefono" required>
+        </div>
+        <div class="mb-3">
+          <label for="correo" class="form-label">Correo:</label>
+          <input type="email" class="form-control" id="correo" aria-describedby="emailHelp" required>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Contraseña:</label>
+          <input type="password" class="form-control" id="password" aria-describedby="emailHelp" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Registrar Cliente</button>
+      </form>
+
+      <form class="col-3" id="frmGerente">
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre:</label>
+          <input type="text" class="form-control" id="nombre" required>
+        </div>
+        <div class="mb-3">
+          <label for="direccion" class="form-label">Direccion:</label>
+          <input type="text" class="form-control" id="direccion" required>
+        </div>
+        <div class="mb-3">
+          <label for="codigoPostal" class="form-label">Asentamiento:</label>
+          <select name="codigoPostal" id="codigoPostal">
+            <option value="" selected disabled hidden>Seleccione un asentamiento</option>
+            <% asentamientos.forEach(asentamiento =>{ %>
+            <option value="<%= asentamiento.idcodigo_postal%>"><%= asentamiento.asentamiento%></option>
+            <% }) %>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="telefono" class="form-label">Telefono:</label>
+          <input type="number" class="form-control" id="telefono" required>
+        </div>
+        <div class="mb-3">
+          <label for="correo" class="form-label">Correo:</label>
+          <input type="email" class="form-control" id="correo" aria-describedby="emailHelp" required>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Contraseña:</label>
+          <input type="password" class="form-control" id="password" aria-describedby="emailHelp" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Registrar Gerente de Proyectos</button>
+      </form>
+
+      <form class="col-3" id="frmAgente">
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre:</label>
+          <input type="text" class="form-control" id="nombre" required>
+        </div>
+        <div class="mb-3">
+          <label for="apellido" class="form-label">Apellidos:</label>
+          <input type="text" class="form-control" id="apellido" required>
+        </div>
+        <div class="mb-3">
+          <label for="telefono" class="form-label">Telefono:</label>
+          <input type="number" class="form-control" id="telefono" required>
+        </div>
+        <div class="mb-3">
+          <label for="correo" class="form-label">Correo:</label>
+          <input type="email" class="form-control" id="correo" aria-describedby="emailHelp" required>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Contraseña:</label>
+          <input type="password" class="form-control" id="password" aria-describedby="emailHelp" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Registrar Agente de Ventas</button>
+      </form>
+      <form class="col-3" id="frmValuador">
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre:</label>
+          <input type="text" class="form-control" id="nombre" required>
+        </div>
+        <div class="mb-3">
+          <label for="apellido" class="form-label">Apellidos:</label>
+          <input type="text" class="form-control" id="apellido" required>
+        </div>
+        <div class="mb-3">
+          <label for="telefono" class="form-label">Telefono:</label>
+          <input type="number" class="form-control" id="telefono" required>
+        </div>
+        <div class="mb-3">
+          <label for="correo" class="form-label">Correo:</label>
+          <input type="email" class="form-control" id="correo" aria-describedby="emailHelp" required>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Contraseña:</label>
+          <input type="password" class="form-control" id="password" aria-describedby="emailHelp" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Registrar Valuador</button>
+      </form>
+    </div>
+  </main>
+  <script src="http://localhost/js/registro.js"></script>
+</body>
+
+</html>

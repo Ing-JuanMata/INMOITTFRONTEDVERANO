@@ -9,17 +9,17 @@ const router = express.Router();
 router.get("/cuentas", getControllers.getCuentas);
 router.get("/cuentas/:correo", getControllers.getCuenta);
 router.get("/clientes", getControllers.getClientes);
-router.get("/clientes/:idCliente", getControllers.getCliente);
+router.get("/clientes/:correo", getControllers.getCliente);
 router.get("/gerentes", getControllers.getGerentesProyectos);
-router.get("/gerentes/:idGerente", getControllers.getGerenteProyectos);
+router.get("/gerentes/:correo", getControllers.getGerenteProyectos);
 router.get("/proyectos/:idGerente", getControllers.getProyectosGerente);
 router.get("/administradores", getControllers.getAdministradores);
 router.get(
-  "/administradores/:idAdministrador",
+  "/administradores/:correo",
   getControllers.getAdministrador
 );
 router.get("/agentes", getControllers.getAgentesVentas);
-router.get("/agentes/:idAgente", getControllers.getAgenteVentas);
+router.get("/agentes/:correo", getControllers.getAgenteVentas);
 router.get("/inmueblesAgente/:idAgente", getControllers.getProyectosAgente);
 router.get("/inmuebles", getControllers.getInmuebles);
 router.get("/inmuebles/:idInmueble", getControllers.getInmueble);
@@ -29,7 +29,7 @@ router.get("/adeudos", getControllers.getAdeudos);
 router.get("/adeudos/:idInmueble", getControllers.getAdeudosInmueble);
 router.get("/cp", getControllers.getCodigoPostal);
 router.get("/valuadores", getControllers.getValuadores);
-router.get("/valuadores/:idValuador", getControllers.getValuador);
+router.get("/valuadores/:correo", getControllers.getValuador);
 router.get(
   "/inmueblesValuador/:idValuador",
   getControllers.getInmueblesEvaluador

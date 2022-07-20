@@ -2,11 +2,6 @@ html{
     background-color: #E9FFF9;
 }
 
-a{
-    color: black;
-    text-decoration: none;
-}
-
 .navbar{
     margin-bottom: 0;
 }
@@ -22,13 +17,7 @@ h2{
     color:white;
 }
 
-.tiporustico, .tipourbano{
-    
-    font-family: 'Arima', cursive;
-    font-size: x-large;
-    color: black; 
-    text-decoration:solid;
-}
+
 
 .inmueble figcaption {
     color: black;
@@ -43,3 +32,21 @@ h2{
     color:white;
 }
 
+footer {
+    background: #16222A;
+    background: -webkit-linear-gradient(59deg, #3A6073, #16222A);
+    background: linear-gradient(59deg, #3A6073, #16222A);
+    color: white;
+
+}
+
+.categoria {
+display: inline-block;
+padding: 8px 20px;
+margin-bottom: 1rem;
+text-decoration:none;
+}
+
+.categoria:hover {
+border-bottom: 3px solid #1d3354;
+}

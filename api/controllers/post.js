@@ -4,8 +4,8 @@ const fetch = require("node-fetch");
 const postCuenta = (req, res) => {
   const conn = conectar();
   conn.execute(
-    "INSERT INTO cuenta VALUES (?, ?)",
-    [req.body.correo, req.body.password],
+    "INSERT INTO cuenta VALUES (?, ?, ?)",
+    [req.body.correo, req.body.password, req.body.tipo],
     (err, results, fields) => {
       if (err) {
         res.json({ err });
@@ -23,6 +23,7 @@ const postCliente = (req, res) => {
     body: JSON.stringify({
       correo: req.body.correo,
       password: req.body.password,
+      tipo: "Cliente",
     }),
     headers: { "Content-Type": "application/json" },
   })
@@ -59,6 +60,7 @@ const postGerenteProyectos = (req, res) => {
     body: JSON.stringify({
       correo: req.body.correo,
       password: req.body.password,
+      tipo: "Gerente",
     }),
     headers: { "Content-Type": "application/json" },
   })
@@ -96,6 +98,7 @@ const postAdministrador = (req, res) => {
     body: JSON.stringify({
       correo: req.body.correo,
       password: req.body.password,
+      tipo: "Admin",
     }),
     headers: { "Content-Type": "application/json" },
   })
@@ -127,6 +130,7 @@ const postValuador = (req, res) => {
     body: JSON.stringify({
       correo: req.body.correo,
       password: req.body.password,
+      tipo: "Valuador",
     }),
     headers: { "Content-Type": "application/json" },
   }).then((data) => {
@@ -156,6 +160,7 @@ const postAgenteVentas = (req, res) => {
     body: JSON.stringify({
       correo: req.body.correo,
       password: req.body.password,
+      tipo: "Agente",
     }),
     headers: { "Content-Type": "application/json" },
   })

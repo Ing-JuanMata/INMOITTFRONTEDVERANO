@@ -4,6 +4,7 @@ const path = require("path");
 const routes = require("./routes");
 const DataRoutes = require("./api/routes");
 const bodyParser = require("body-parser");
+const session = require("express-session");
 const app = express();
 
 // settings
@@ -13,9 +14,15 @@ app.set("view engine", "ejs");
 
 //middlewares
 app.use(morgan("tiny"));
-
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(
+  session({
+    saveUninitialized: true,
+    resave: true,
+    secret: "InmoITT",
+  })
+);
 
 // routes
 app.use(routes);
