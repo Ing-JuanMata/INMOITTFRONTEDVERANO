@@ -39,6 +39,29 @@ router.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
+router.get("/nuevo", (req, res) => {
+  /*
+  if (!(req.session.tipo == "Agente" || req.session.tipo == "Gerente")) {
+    res.redirect("/");
+    return;
+  }
+  */
+  fetch("http://localhost/data/cp")
+    .then((data) => data.json())
+    .then((asentamientos) => {
+      if (asentamientos.err) {
+        console.log(asentamientos.err);
+        res.redirect("/");
+        return;
+      }
+      res.render("proyecto", {
+        cps: asentamientos.results,
+        actor: req.session.tipo,
+        creado: false,
+      });
+    });
+});
+
 router.get("/inmueble/:idInmueble", (req, res) => {
   res.render("proyecto", {
     actor: req.session.tipo,
@@ -232,6 +255,34 @@ router.post("/login", (req, res) => {
         return;
       }
       res.status(401).end();
+    });
+});
+
+router.post("/nuevo", (req, res) => {
+  let datos =
+    req.session.tipo == "Gerente"
+      ? { idGerente: req.session.clave }
+      : { idAgente: req.session.clave };
+  fetch(`http://localhost/data/Inmueble`, {
+    method: "POST",
+    body: JSON.stringify(req.body),
+    headers: { "Content-Type": "application/json" },
+  })
+    .then((data) => data.json())
+    .then((data) => {
+      datos.idInmueble = data.results.insertId;
+      fetch(
+        req.session.tipo == "Gerente"
+          ? "http://localhost/data/gerenteProyecto"
+          : "http://localhost/data/agenteInmueble",
+        {
+          method: "POST",
+          body: JSON.stringify(datos),
+          headers: { "Content-Type": "application/json" },
+        }
+      ).then(() => {
+        res.end();
+      });
     });
 });
 

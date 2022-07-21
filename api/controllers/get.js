@@ -59,7 +59,7 @@ const getCliente = (req, res) => {
 const getGerentesProyectos = (req, res) => {
   const conn = conectar();
   conn.query(
-    `SELECT correo, nombre FROM gerente_proyectos`,
+    `SELECT idgerente_proyecto, correo, nombre FROM gerente_proyectos`,
     (err, results, fields) => {
       if (err) {
         res.json({ err });
