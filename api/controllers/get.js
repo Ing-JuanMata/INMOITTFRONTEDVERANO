@@ -59,7 +59,7 @@ const getCliente = (req, res) => {
 const getGerentesProyectos = (req, res) => {
   const conn = conectar();
   conn.query(
-    `SELECT idgerente_proyecto, nombre FROM gerente_proyectos`,
+    `SELECT correo, nombre FROM gerente_proyectos`,
     (err, results, fields) => {
       if (err) {
         res.json({ err });
@@ -74,7 +74,7 @@ const getGerentesProyectos = (req, res) => {
 const getGerenteProyectos = (req, res) => {
   const conn = conectar();
   conn.execute(
-    `SELECT gp.idgerente_proyecto, gp.nombre, gp.telefono, gp.direccion, cp.asentamiento, cp.codigo_postal, gp.correo FROM gerente_proyectos gp INNER JOIN codigo_postal cp ON gp.idcodigo_postal = cp.idcodigo_postal WHERE gp.correo = ?`,
+    `SELECT gp.idgerente_proyecto, gp.nombre, gp.telefono, gp.direccion, cp.asentamiento, cp.codigo_postal, gp.idcodigo_postal, gp.correo FROM gerente_proyectos gp INNER JOIN codigo_postal cp ON gp.idcodigo_postal = cp.idcodigo_postal WHERE gp.correo = ?`,
     [req.params.correo],
     (err, results, fields) => {
       if (err) {

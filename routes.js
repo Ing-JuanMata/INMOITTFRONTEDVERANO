@@ -5,6 +5,7 @@ const router = express.Router();
 router.get("/", (req, res) => {
   res.render("proyectos", {
     proyectos: [1, 2, 3, 4, 5],
+    actor: req.session.tipo,
   });
 });
 
@@ -24,28 +25,156 @@ router.get("/registro", (req, res) => {
     });
 });
 
+router.get("/registroAdmin", (req, res) => {
+  if (req.session.tipo == "Admin") res.render("registroAdmin");
+  res.redirect("/");
+});
+
 router.get("/login", (req, res) => {
   res.render("login");
 });
 
+router.get("/logout", (req, res) => {
+  req.session.destroy();
+  res.redirect("/");
+});
+
 router.get("/inmueble/:idInmueble", (req, res) => {
-  res.render("proyecto");
+  res.render("proyecto", {
+    actor: req.session.tipo,
+  });
 });
 
 router.get("/agentes", (req, res) => {
-  res.render("agentes");
+  res.render("agentes", {
+    actor: req.session.tipo,
+  });
 });
 
 router.get("/perfil", (req, res) => {
-  res.render("perfil");
+  let ruta = "";
+  switch (req.session.tipo) {
+    case "Admin":
+      ruta = "administradores";
+      break;
+    case "Cliente":
+      ruta = "clientes";
+      break;
+    case "Gerente":
+      ruta = "gerentes";
+      break;
+    case "Agente":
+      ruta = "agentes";
+      break;
+    case "Valuador":
+      ruta = "valuadores";
+      break;
+    default:
+      res.redirect("/");
+      return;
+  }
+  fetch(`http://localhost/data/${ruta}/${req.session.correo}`)
+    .then((data) => data.json())
+    .then((data) => {
+      if (data.err) {
+        res.redirect("/");
+        return;
+      }
+      let datos = data.results[0];
+      fetch("http://localhost/data/cp")
+        .then((data) => data.json())
+        .then((data) => {
+          if (data.err) {
+            res.redirect("/");
+            return;
+          }
+          let cps = data.results;
+          res.render("perfil", {
+            actor: req.session.tipo,
+            datos,
+            cps,
+          });
+        });
+    });
 });
 
 router.get("/about", (req, res) => {
-  router.render("sobreEmpresa");
+  fetch("http://localhost/data/administradores")
+    .then((data) => data.json())
+    .then((data) => {
+      if (data.err) {
+        res.render("sobreEmpresa", {
+          actor: req.session.tipo,
+          admins: [],
+        });
+      }
+      res.render("sobreEmpresa", {
+        actor: req.session.tipo,
+        admins: data.results,
+      });
+    });
 });
 
 router.get("/usuarios", (req, res) => {
-  router.get("Usuarios");
+  if (req.session.tipo != "Admin") {
+    res.redirect("/");
+    return;
+  }
+
+  fetch("http://localhost/data/cuentas")
+    .then((data) => data.json())
+    .then((data) => {
+      if (data.err) {
+        res.render("Usuarios", {
+          actor: req.session.tipo,
+          cuentas: [],
+        });
+        return;
+      }
+      res.render("Usuarios", {
+        actor: req.session.tipo,
+        cuentas: data.results,
+      });
+    });
+});
+
+router.get("/usuarios/:correo/:tipo", (req, res) => {
+  if (req.session.tipo != "Admin") {
+    res.redirect("/");
+    return;
+  }
+
+  let ruta = "";
+  switch (req.params.tipo) {
+    case "Admin":
+      ruta = "administradores";
+      break;
+    case "Cliente":
+      ruta = "clientes";
+      break;
+    case "Gerente":
+      ruta = "gerentes";
+      break;
+    case "Agente":
+      ruta = "agentes";
+      break;
+    case "Valuador":
+      ruta = "valuadores";
+      break;
+  }
+  fetch(`http://localhost/data/${ruta}/${req.params.correo}`)
+    .then((data) => data.json())
+    .then((data) => {
+      if (data.err) {
+        res.redirect("/");
+        return;
+      }
+      res.render("usuario", {
+        actor: req.session.tipo,
+        datos: data.results[0],
+        tipo: req.params.tipo,
+      });
+    });
 });
 
 router.post("/session", (req, res) => {
@@ -65,66 +194,95 @@ router.post("/login", (req, res) => {
         return;
       }
       if (data.results[0].password == req.body.password) {
+        let ruta = "";
+        let identificador = "";
+        let tipo = data.results[0].tipo;
         switch (data.results[0].tipo) {
           case "Cliente":
-            fetch(`http://localhost/data/clientes/${req.body.correo}`)
-              .then((data) => (data.json ? data.json() : res.status(401).end()))
-              .then((data) => {
-                sess = req.session;
-                sess.correo = req.body.correo;
-                sess.tipo = "Cliente";
-                sess.clave = data.results[0].idcliente;
-                res.status(200).end();
-              });
+            ruta = "clientes";
+            identificador = "idcliente";
             break;
           case "Gerente":
-            fetch(`http://localhost/data/gerentes/${req.body.correo}`)
-              .then((data) => (data.json ? data.json() : res.status(401).end()))
-              .then((data) => {
-                sess = req.session;
-                sess.correo = req.body.correo;
-                sess.tipo = "Gerente";
-                sess.clave = data.results[0].idgerente_proyecto;
-                res.status(200).end();
-              });
+            ruta = "gerentes";
+            identificador = "idgerente_proyecto";
             break;
           case "Admin":
-            fetch(`http://localhost/data/administradores/${req.body.correo}`)
-              .then((data) => (data.json ? data.json() : res.status(401).end()))
-              .then((data) => {
-                sess = req.session;
-                sess.correo = req.body.correo;
-                sess.tipo = "Admin";
-                sess.clave = data.results[0].idAdministrador;
-                res.status(200).end();
-              });
+            ruta = "administradores";
+            identificador = "idAdministrador";
             break;
           case "Valuador":
-            fetch(`http://localhost/data/valuadores/${req.body.correo}`)
-              .then((data) => (data.json ? data.json() : res.status(401).end()))
-              .then((data) => {
-                sess = req.session;
-                sess.correo = req.body.correo;
-                sess.tipo = "Valuador";
-                sess.clave = data.results[0].idValuador;
-                res.status(200).end();
-              });
+            ruta = "valuadores";
+            identificador = "idValuador";
             break;
           case "Agente":
-            fetch(`http://localhost/data/agentes/${req.body.correo}`)
-              .then((data) => (data.json ? data.json() : res.status(401).end()))
-              .then((data) => {
-                sess = req.session;
-                sess.correo = req.body.correo;
-                sess.tipo = "Agente";
-                sess.clave = data.results[0].idagente_ventas;
-                res.status(200).end();
-              });
+            ruta = "agentes";
+
             break;
         }
+
+        fetch(`http://localhost/data/${ruta}/${req.body.correo}`)
+          .then((data) => (data.json ? data.json() : res.status(401).end()))
+          .then((data) => {
+            sess = req.session;
+            sess.correo = req.body.correo;
+            sess.tipo = tipo;
+            sess.clave = data.results[0][identificador];
+            res.status(200).end();
+          });
         return;
       }
       res.status(401).end();
     });
+});
+
+router.put("/perfil", (req, res) => {
+  let ruta = "";
+  switch (req.session.tipo) {
+    case "Admin":
+      ruta = "administrador";
+      break;
+    case "Cliente":
+      ruta = "cliente";
+      break;
+    case "Gerente":
+      ruta = "gerente";
+      break;
+    case "Agente":
+      ruta = "agente";
+      break;
+    case "Valuador":
+      ruta = "valuador";
+      break;
+  }
+  let datos = req.body;
+  datos.correoN = datos.correo;
+  datos.correo = req.session.correo;
+  fetch(`http://localhost/data/${ruta}`, {
+    method: "PUT",
+    body: JSON.stringify(datos),
+    headers: { "Content-Type": "application/json" },
+  })
+    .then((data) => data.json())
+    .then((data) => {
+      if (data.err) {
+        res.status(403).end();
+        return;
+      }
+      req.session.correo = datos.correoN;
+      res.status(200).end();
+    });
+});
+
+router.put("/cuenta", (req, res) => {
+  fetch("http://localhost/data/cuenta", {
+    method: "PUT",
+    body: JSON.stringify({
+      password: req.body.password,
+      correo: req.session.correo,
+    }),
+    headers: { "Content-Type": "application/json" },
+  }).then(() => {
+    res.end();
+  });
 });
 module.exports = router;

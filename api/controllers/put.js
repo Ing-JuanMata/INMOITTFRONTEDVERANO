@@ -1,6 +1,20 @@
 const conectar = require("./conexion");
 const fetch = require("node-fetch");
 
+const putCuenta = (req, res) => {
+  conn = conectar();
+  conn.execute(
+    "UPDATE cuenta SET password = ? WHERE correo = ?",
+    [req.body.password, req.body.correo],
+    (err, results, fields) => {
+      if (err) {
+        res.json({ err });
+        return;
+      }
+      res.json({ results });
+    }
+  );
+};
 const putCliente = (req, res) => {
   const conn = conectar();
   conn.execute(
@@ -188,6 +202,7 @@ const putAdeudoInmueble = (req, res) => {
 };
 
 module.exports = {
+  putCuenta,
   putCliente,
   putGerente,
   putAdministrador,

@@ -1,86 +1,37 @@
 <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0" style="background-color:#467599;">
   <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-75 h-75">
     <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-      <span class="fs-5 d-none d-sm-inline text-center">Comprador</span>
+      <span class="fs-5 d-none d-sm-inline text-center"><%= actor %></span>
     </a>
     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
       <li class="nav-item">
-        <a href="index.html" class="nav-link align-middle px-0">
-          <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline text-white">Catalogo de Inmuebles</span>
+        <a href="/" class="nav-link align-middle px-0">
+          <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline text-white">Catalogo de <%= actor == "Gerente" ? "Proyectos" : "Inmuebles" %></span>
         </a>
       </li>
       <li>
-        <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-          <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline text-white">Administrador</span> </a>
         <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
-          <li class="w-100">
-            <a href="./ProyectosA adm.html" class="nav-link px-0 text-white"> <span class="d-none d-sm-inline text-white">Proyectos</span></a>
-          </li>
           <li>
-            <a href="./SobreEmpresa adm.html" class="nav-link px-0 text-white"> <span class="d-none d-sm-inline text-white">sobreEmpresa</span></a>
+            <a href="/about" class="nav-link px-0 text-white"> <span class="d-none d-sm-inline text-white">Sobre Nosotros</span></a>
           </li>
+          <% if(actor == "Admin"){%>
           <li>
-            <a href="./CRUDsobreEmpresa adm.html" class="nav-link px-0 text-white"> <span class="d-none d-sm-inline text-white">modificarEmpresa</span></a>
+            <a href="/usuarios" class="nav-link px-0 text-white"> <span class="d-none d-sm-inline text-white">Usuarios</span></a>
           </li>
-          <li>
-            <a href="./Usuarios adm.html" class="nav-link px-0 text-white"> <span class="d-none d-sm-inline text-white">Usuarios</span></a>
-          </li>
+          <li><a href="/registroAdmin" class="nav-link px-0 text-white">Registrar Administrador</a></li>
+          <%}%>
         </ul>
       </li>
-      <li>
-        <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-          <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline text-white">Gerente de Proyectos</span> </a>
-        <ul class="collapse show nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
-          <li class="w-100">
-            <a href="./agentesGP.html" class="nav-link px-0 text-white"> <span class="d-none d-sm-inline text-white">Agentes de Venta</span></a>
-          </li>
+      <% if(actor == "Gerente" || actor == "Agente"){%>
           <li>
-            <a href="./indexGP.html" class="nav-link px-0 text-white"> <span class="d-none d-sm-inline text-white">Índice de Proyectos</span></a>
+            <a href="/nuevo" class="nav-link px-0 text-white"> <span class="d-none d-sm-inline text-white">Agregar <%= actor == "Gerente" ? "Proyecto":"Inmueble" %></span></a>
           </li>
+          <%}%>
+          <% if(actor){ %>
           <li>
-            <a href="./infoinmoitt.html" class="nav-link px-0 text-white"> <span class="d-none d-sm-inline text-white">Información InmoITT</span></a>
+            <a href="/perfil" class="nav-link px-0 text-white"> <span class="d-none d-sm-inline text-white">Ver mi perfil</span></a>
           </li>
-          <li>
-            <a href="./perfilGP.html" class="nav-link px-0 text-white"> <span class="d-none d-sm-inline text-white">Perfil</span></a>
-          </li>
-          <li>
-            <a href="./proyecto.html" class="nav-link px-0 text-white"> <span class="d-none d-sm-inline text-white">Proyecto</span></a>
-          </li>
+          <% } %>
         </ul>
-      </li>
-      <li>
-        <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-          <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline text-white">Comprador</span> </a>
-        <ul class="collapse show nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
-          <li class="w-100">
-            <a href="./index comprador.html" class="nav-link px-0 text-white"> <span class="d-none d-sm-inline text-white">Catalogo de Inmuebles</span></a>
-          </li>
-          <li>
-            <a href="./inmueble-detalles.html" class="nav-link px-0 text-white"> <span class="d-none d-sm-inline text-white">Detalles Inmuebles</span></a>
-          </li>
-        </ul>
-      </li>
-      <li>
-        <a href="./valuador.html" class="nav-link px-0 align-middle">
-          <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline text-white">Valuador</span>
-        </a>
-      </li>
-    </ul>
-    <hr>
-    <div class="dropdown pb-4">
-      <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-        <img src="http://localhost/IMG/foto_perfil.jpg" alt="perfil" width="30" height="30" class="rounded-circle">
-        <span class="d-none d-sm-inline mx-1">Chirstian Alexis</span>
-      </a>
-      <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-        <li><a class="dropdown-item" href="#">Proyecto nuevo...</a></li>
-        <li><a class="dropdown-item" href="#">Configuración</a></li>
-        <li><a class="dropdown-item" href="#">Perfil</a></li>
-        <li>
-          <hr class="dropdown-divider">
-        </li>
-        <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
-      </ul>
-    </div>
   </div>
 </div>

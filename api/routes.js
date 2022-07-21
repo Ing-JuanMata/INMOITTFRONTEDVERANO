@@ -14,10 +14,7 @@ router.get("/gerentes", getControllers.getGerentesProyectos);
 router.get("/gerentes/:correo", getControllers.getGerenteProyectos);
 router.get("/proyectos/:idGerente", getControllers.getProyectosGerente);
 router.get("/administradores", getControllers.getAdministradores);
-router.get(
-  "/administradores/:correo",
-  getControllers.getAdministrador
-);
+router.get("/administradores/:correo", getControllers.getAdministrador);
 router.get("/agentes", getControllers.getAgentesVentas);
 router.get("/agentes/:correo", getControllers.getAgenteVentas);
 router.get("/inmueblesAgente/:idAgente", getControllers.getProyectosAgente);
@@ -67,6 +64,7 @@ router.delete("/inmuebleValuador", deleteControllers.deleteInmuebleValuador);
 router.delete("/inmuebleAgente", deleteControllers.deleteInmuebleAgente);
 
 //PUT
+router.put("/cuenta", putCotrollers.putCuenta);
 router.put("/cliente", putCotrollers.putCliente);
 router.put("/gerente", putCotrollers.putGerente);
 router.put("/administrador", putCotrollers.putAdministrador);

@@ -13,8 +13,13 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+      <% if(!actor){%>
       <a class="btn btn-outline-light" style="margin-left:0.5%;" href="/login">Ingresar</a>
       <a class="btn btn-outline-light" style="margin-left:0.5%;" href="/registro">Registrarse</a>
+      <% } %>
+      <% if(actor){%>
+      <a class="btn btn-danger" style="margin-left:0.5%;" href="/logout">Cerrar sesion</a>
+      <% } %>
     </div>
   </div>
 </nav><!--   NAVBAR   -->
