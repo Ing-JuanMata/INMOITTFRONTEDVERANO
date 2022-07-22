@@ -2,7 +2,7 @@ const conectar = require("./conexion");
 
 const getCuentas = (req, res) => {
   const conn = conectar();
-  conn.query(`SELECT correo, tipo FROM cuenta`, (err, results, fields) => {
+  conn.query(`SELECT correo, tipo, foto FROM cuenta`, (err, results, fields) => {
     if (err) {
       res.json({ err });
       return;
@@ -43,7 +43,7 @@ const getClientes = (req, res) => {
 const getCliente = (req, res) => {
   const conn = conectar();
   conn.execute(
-    `SELECT * FROM cliente WHERE correo = ?`,
+    `SELECT c.idcliente, c.nombre, c.apellido, c.telefono, cu.correo, cu.foto FROM cliente c INNER JOIN cuenta cu ON c.correo = cu.correo WHERE cu.correo = ?`,
     [req.params.correo],
     (err, results, fields) => {
       if (err) {
@@ -74,7 +74,7 @@ const getGerentesProyectos = (req, res) => {
 const getGerenteProyectos = (req, res) => {
   const conn = conectar();
   conn.execute(
-    `SELECT gp.idgerente_proyecto, gp.nombre, gp.telefono, gp.direccion, cp.asentamiento, cp.codigo_postal, gp.idcodigo_postal, gp.correo FROM gerente_proyectos gp INNER JOIN codigo_postal cp ON gp.idcodigo_postal = cp.idcodigo_postal WHERE gp.correo = ?`,
+    `SELECT gp.idgerente_proyecto, gp.nombre, gp.telefono, gp.direccion, cp.asentamiento, cp.codigo_postal, gp.idcodigo_postal, gp.correo, c.foto FROM gerente_proyectos gp INNER JOIN codigo_postal cp ON gp.idcodigo_postal = cp.idcodigo_postal INNER JOIN cuenta c ON c.correo = gp.correo WHERE gp.correo = ?`,
     [req.params.correo],
     (err, results, fields) => {
       if (err) {
@@ -90,7 +90,7 @@ const getGerenteProyectos = (req, res) => {
 const getProyectosGerente = (req, res) => {
   const conn = conectar();
   conn.query(
-    `SELECT i.idinmueble, i.titulo, i.precio_venta, i.precio_renta, i.direccion FROM proyectos_gerente pg INNER JOIN inmueble i ON i.idinmueble = pg.idinmueble WHERE pg.idgerente_proyectos = ?`,
+    `SELECT i.idinmueble, i.titulo, i.precio_venta, i.precio_renta, i.direccion, i.foto FROM proyectos_gerente pg INNER JOIN inmueble i ON i.idinmueble = pg.idinmueble WHERE pg.idgerente_proyectos = ?`,
     [req.params.idGerente],
     (err, results, fields) => {
       if (err) {
@@ -118,7 +118,7 @@ const getAdministradores = (req, res) => {
 const getAdministrador = (req, res) => {
   const conn = conectar();
   conn.execute(
-    `SELECT * FROM administrador WHERE correo = ?`,
+    `SELECT a.idadministrador, a.nombre, c.correo, c.foto FROM administrador a INNER JOIN cuenta c ON a.correo = c.correo WHERE c.correo = ?`,
     [req.params.correo],
     (err, results, fields) => {
       if (err) {
@@ -146,7 +146,7 @@ const getAgentesVentas = (req, res) => {
 const getAgenteVentas = (req, res) => {
   const conn = conectar();
   conn.execute(
-    `SELECT * FROM agente_ventas WHERE correo = ?`,
+    `SELECT av.idagente_ventas, av.nombre, av.apellido, av.telefono, c.correo, c.foto FROM agente_ventas av INNER JOIN cuenta c WHERE c.correo = ?`,
     [req.params.correo],
     (err, results, fields) => {
       if (err) {
@@ -162,7 +162,7 @@ const getAgenteVentas = (req, res) => {
 const getProyectosAgente = (req, res) => {
   const conn = conectar();
   conn.execute(
-    `SELECT i.idinmueble, i.titulo, i.precio_venta, i.precio_renta, i.direccion FROM inmueble_agente ia INNER JOIN inmueble i ON i.idinmueble = ia.idinmueble WHERE ia.idagente_ventas = ?`,
+    `SELECT i.idinmueble, i.titulo, i.precio_venta, i.precio_renta, i.direccion, i.foto FROM inmueble_agente ia INNER JOIN inmueble i ON i.idinmueble = ia.idinmueble WHERE ia.idagente_ventas = ?`,
     [req.params.idAgente],
     (err, results, fields) => {
       if (err) {
@@ -178,7 +178,7 @@ const getProyectosAgente = (req, res) => {
 const getInmuebles = (req, res) => {
   const conn = conectar();
   conn.query(
-    `SELECT i.idinmueble, i.titulo, i.precio_venta, i.precio_renta, i.direccion FROM inmueble i INNER JOIN codigo_postal cp ON i.idcodigo_postal = cp.idcodigo_postal`,
+    `SELECT i.idinmueble, i.titulo, i.precio_venta, i.precio_renta, i.direccion, i.foto FROM inmueble i INNER JOIN codigo_postal cp ON i.idcodigo_postal = cp.idcodigo_postal`,
     (err, results, fields) => {
       if (err) {
         res.json({ err });
@@ -193,7 +193,7 @@ const getInmuebles = (req, res) => {
 const getInmueble = (req, res) => {
   const conn = conectar();
   conn.execute(
-    `SELECT i.idinmueble, i.titulo, i.precio_venta, i.precio_renta, i.cuartos, i.pisos, i.area, i.direccion, cp.idcodigo_postal, cp.asentamiento, cp.codigo_postal FROM inmueble i INNER JOIN codigo_postal cp ON i.idcodigo_postal = cp.idcodigo_postal WHERE i.idinmueble = ?`,
+    `SELECT i.idinmueble, i.titulo, i.precio_venta, i.precio_renta, i.cuartos, i.pisos, i.area, i.direccion, cp.idcodigo_postal, cp.asentamiento, cp.codigo_postal, i.foto FROM inmueble i INNER JOIN codigo_postal cp ON i.idcodigo_postal = cp.idcodigo_postal WHERE i.idinmueble = ?`,
     [req.params.idInmueble],
     (err, results, fields) => {
       if (err) {
@@ -276,7 +276,7 @@ const getValuadores = (req, res) => {
 const getValuador = (req, res) => {
   const conn = conectar();
   conn.query(
-    `SELECT * FROM valuador WHERE correo = ?`,
+    `SELECT v.idcliente, v.nombre, v.apellido, v.telefono, c.correo, c.foto FROM valuador v INNER JOIN cuenta c v.correo = c.correo WHERE c.correo = ?`,
     [req.params.correo],
     (err, results, fields) => {
       if (err) {
@@ -292,7 +292,7 @@ const getValuador = (req, res) => {
 const getInmueblesEvaluador = (req, res) => {
   const conn = conectar();
   conn.execute(
-    `SELECT i.idinmueble, i.titulo, i.precio_venta, i.precio_renta, i.direccion FROM inmueble_valuador iv INNER JOIN inmueble i ON i.idinmueble = iv.idinmueble WHERE idvaluador = ?`,
+    `SELECT i.idinmueble, i.titulo, i.precio_venta, i.precio_renta, i.direccion, i.foto FROM inmueble_valuador iv INNER JOIN inmueble i ON i.idinmueble = iv.idinmueble WHERE idvaluador = ?`,
     [req.params.idValuador],
     (err, results, fields) => {
       if (err) {

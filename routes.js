@@ -76,6 +76,7 @@ router.get("/nuevo", (req, res) => {
         cps: asentamientos.results,
         actor: req.session.tipo,
         creado: false,
+        datos: {},
       });
     });
 });
@@ -293,6 +294,7 @@ router.post("/login", (req, res) => {
     .then((data) => (data.json ? data.json() : res.status(401).end()))
     .then((data) => {
       if (!data.results[0]) {
+        
         res.status(401).end();
         return;
       }
@@ -326,15 +328,23 @@ router.post("/login", (req, res) => {
         fetch(`http://localhost/data/${ruta}/${req.body.correo}`)
           .then((data) => (data.json ? data.json() : res.status(401).end()))
           .then((data) => {
+            if (data.err) {
+              console.log(data.err);
+              res.status(401).end();
+              return;
+            }
+            console.log("Todo bien");
             sess = req.session;
             sess.correo = req.body.correo;
             sess.tipo = tipo;
             sess.clave = data.results[0][identificador];
             res.status(200).end();
+            return;
           });
-        return;
+      } else {
+        
+        res.status(401).end();
       }
-      res.status(401).end();
     });
 });
 

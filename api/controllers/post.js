@@ -4,8 +4,8 @@ const fetch = require("node-fetch");
 const postCuenta = (req, res) => {
   const conn = conectar();
   conn.execute(
-    "INSERT INTO cuenta VALUES (?, ?, ?)",
-    [req.body.correo, req.body.password, req.body.tipo],
+    "INSERT INTO cuenta VALUES (?, ?, ?, ?)",
+    [req.body.correo, req.body.password, req.body.tipo, "/img/perfil.webp"],
     (err, results, fields) => {
       if (err) {
         res.json({ err });

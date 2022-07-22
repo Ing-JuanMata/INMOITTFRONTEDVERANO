@@ -13,6 +13,6 @@ login.addEventListener("submit", function (event) {
       alert("Correo o contraseña incorrectos");
       return;
     }
-    window.location.replace("http://localhost/");
+    window.location.replace("http://localhost/perfil");
   });
 });

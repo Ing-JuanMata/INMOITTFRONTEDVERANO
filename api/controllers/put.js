@@ -1,5 +1,10 @@
 const conectar = require("./conexion");
 const fetch = require("node-fetch");
+const sharp = require("sharp");
+
+const helperImg = (filePath, fileName, size = 300) => {
+  return sharp(filePath).resize(size).toFile(`./public/img/${fileName}`);
+};
 
 const putCuenta = (req, res) => {
   conn = conectar();
@@ -201,6 +206,39 @@ const putAdeudoInmueble = (req, res) => {
   );
 };
 
+const putPerfil = (req, res) => {
+  const conn = conectar();
+  conn.execute(
+    "UPDATE cuenta SET foto = ? WHERE correo = ?",
+    [`/img/${req.file.filename}`, req.session.correo],
+    (err, results, fields) => {
+      if (err) {
+        res.json({ err });
+        return;
+      }
+      helperImg(req.file.path, req.file.filename);
+      res.redirect("/perfil");
+    }
+  );
+};
+
+const putInmuebleImg = (req, res) => {
+  const conn = conectar();
+  const path = `/img/${req.file.filename}`;
+  conn.execute(
+    "UPDATE inmueble SET foto = ? WHERE idinmueble = ?",
+    [path, req.body.idInmueble],
+    (err, results, fields) => {
+      if (err) {
+        res.json({ err });
+        return;
+      }
+      helperImg(req.file.path, req.file.filename);
+      res.redirect("/");
+    }
+  );
+};
+
 module.exports = {
   putCuenta,
   putCliente,
@@ -213,4 +251,6 @@ module.exports = {
   putServicio,
   putInmueble,
   putAdeudoInmueble,
+  putPerfil,
+  putInmuebleImg,
 };

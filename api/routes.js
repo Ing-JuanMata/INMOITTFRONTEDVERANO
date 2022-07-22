@@ -75,5 +75,8 @@ router.put("/adeudo", putCotrollers.putAdeudo);
 router.put("/servicio", putCotrollers.putServicio);
 router.put("/inmueble", putCotrollers.putInmueble);
 router.put("/adeudoInmueble", putCotrollers.putAdeudoInmueble);
+//POR FACILIDAD TECNICA
+router.post("/perfil", putCotrollers.putPerfil);
+router.post("/inmuebleImg", putCotrollers.putInmuebleImg);
 
 module.exports = router;

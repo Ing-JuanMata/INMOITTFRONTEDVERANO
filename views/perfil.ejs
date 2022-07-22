@@ -23,7 +23,16 @@
         <div class="col py-3">
           <div class="container h-auto w-100" style=" margin:0; ">
             <div class="row">
-              <img class="rounded-circle col" src="https://github.com/mdo.png" alt="perfil">
+              <div class="col">
+                <img class="rounded-circle row" src="<%= datos.foto %>" alt="perfil">
+                <div class="row">
+                  <form action="/data/perfil" method="post" enctype="multipart/form-data">
+                    <label for="img" class="form-label">Imagen</label>
+                    <input type="file" name="img" id="img" class="form-control mb-3" required>
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                  </form>
+                </div>
+              </div>
               <div class="col">
                 <form id="datos">
                   <div class="mb-3">

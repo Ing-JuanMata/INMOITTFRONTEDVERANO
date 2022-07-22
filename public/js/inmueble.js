@@ -104,7 +104,9 @@ function crearInmueble() {
   })
     .then((data) => data.json())
     .then((data) => {
-      window.location.replace("http://localhost/editar");
+      window.location.replace(
+        `http://localhost/editar/${data.idInmueble}`
+      );
     });
 }
 

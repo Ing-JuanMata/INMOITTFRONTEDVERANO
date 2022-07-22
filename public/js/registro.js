@@ -32,7 +32,7 @@ frmCliente.addEventListener("submit", function (event) {
         }),
         headers: { "Content-Type": "application/json" },
       }).then(() => {
-        window.location.replace("http://localhost/");
+        window.location.replace("http://localhost/perfil");
       });
     });
 });
@@ -66,7 +66,7 @@ frmAgente.addEventListener("submit", function (event) {
         }),
         headers: { "Content-Type": "application/json" },
       }).then(() => {
-        window.location.replace("http://localhost/");
+        window.location.replace("http://localhost/perfil");
       });
     });
 });
@@ -100,7 +100,7 @@ frmValuador.addEventListener("submit", function (event) {
         }),
         headers: { "Content-Type": "application/json" },
       }).then(() => {
-        window.location.replace("http://localhost/");
+        window.location.replace("http://localhost/perfil");
       });
     });
 });
@@ -135,7 +135,7 @@ frmGerente.addEventListener("submit", function (event) {
         }),
         headers: { "Content-Type": "application/json" },
       }).then(() => {
-        window.location.replace("http://localhost/");
+        window.location.replace("http://localhost/perfil");
       });
     });
 });

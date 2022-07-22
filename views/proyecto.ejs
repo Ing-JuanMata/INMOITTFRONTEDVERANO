@@ -25,7 +25,17 @@
             <div class="row">
               <div class="col">
                 <div class="row">
-                  <img class="rounded-4" src="https://www.casasparaconstruir.com/projetos/161/01.jpg" alt="perfil" style="max-width: 500px; height: 500px;">
+                  <% if(creado) { %>
+                  <img class="rounded-4" src="<%= datos.foto %>" alt="perfil" style="max-width: 500px; height: 500px;">
+                  <% if(creado && (actor == "Gerente" || actor == "Agente")) { %>
+                  <form action="/data/inmuebleImg" method="post" enctype="multipart/form-data">
+                    <label for="img" class="form-label">Imagen</label>
+                    <input type="file" name="img" id="img" class="form-control mb-3" required>
+                    <input type="hidden" name="idInmueble" value="<%= datos.idinmueble %>">
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                  </form>
+                  <% } %>
+                  <% } %>
                 </div>
                 <% if(creado && (actor == "Gerente" || actor == "Agente")){ %>
                 <div class="row pt-3" style="max-width: 75%; margin: 0 auto;">
@@ -167,6 +177,7 @@
   </div> <!--   BARRA LATERAL IZQUIERDA   -->
   <!--MODALS-->
   <!-- Modal -->
+  <% if(creado){ %>
   <div class="modal fade" id="modalAdeudos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -207,6 +218,7 @@
       </div>
     </div>
   </div>
+  <% } %>
   <!-- Footer -->
   <%- include('./partials/footer.ejs') %>
   <script src="/js/inmueble.js"></script>
