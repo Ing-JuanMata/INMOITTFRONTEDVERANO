@@ -178,7 +178,7 @@ const getProyectosAgente = (req, res) => {
 const getInmuebles = (req, res) => {
   const conn = conectar();
   conn.query(
-    `SELECT i.idinmueble, i.titulo, i.precio_venta, i.precio_renta, i.direccion, cp.asentamiento, cp.codigo_postal FROM inmueble i INNER JOIN codigo_postal cp ON i.idcodigo_postal = cp.idcodigo_postal`,
+    `SELECT i.idinmueble, i.titulo, i.precio_venta, i.precio_renta, i.direccion FROM inmueble i INNER JOIN codigo_postal cp ON i.idcodigo_postal = cp.idcodigo_postal`,
     (err, results, fields) => {
       if (err) {
         res.json({ err });

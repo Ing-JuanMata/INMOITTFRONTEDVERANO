@@ -3,10 +3,29 @@ const fetch = require("node-fetch");
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  res.render("proyectos", {
-    proyectos: [1, 2, 3, 4, 5],
-    actor: req.session.tipo,
-  });
+  let ruta = "";
+  const actor = req.session.tipo;
+  switch (actor) {
+    case "Gerente":
+      ruta = `proyectos/${req.session.clave}`;
+      break;
+    case "Agente":
+      ruta = `inmueblesAgente/${req.session.clave}`;
+      break;
+    case "Valuador":
+      ruta = `inmueblesValuador/${req.session.clave}`;
+      break;
+    default:
+      ruta = "inmuebles";
+  }
+  fetch(`http://localhost/data/${ruta}`)
+    .then((data) => data.json())
+    .then((data) => {
+      res.render("proyectos", {
+        proyectos: data.results,
+        actor,
+      });
+    });
 });
 
 router.get("/registro", (req, res) => {
@@ -40,12 +59,11 @@ router.get("/logout", (req, res) => {
 });
 
 router.get("/nuevo", (req, res) => {
-  /*
   if (!(req.session.tipo == "Agente" || req.session.tipo == "Gerente")) {
     res.redirect("/");
     return;
   }
-  */
+
   fetch("http://localhost/data/cp")
     .then((data) => data.json())
     .then((asentamientos) => {
@@ -59,6 +77,68 @@ router.get("/nuevo", (req, res) => {
         actor: req.session.tipo,
         creado: false,
       });
+    });
+});
+
+router.get("/editar/:idInmueble", (req, res) => {
+  const actor = req.session.tipo;
+  if (!(actor == "Agente" || actor == "Gerente" || actor == "Valuador")) {
+    res.redirect(`/inmueble/${req.params.idInmueble}`);
+    return;
+  }
+  fetch("http://localhost/data/cp")
+    .then((data) => data.json())
+    .then((asentamientos) => {
+      if (asentamientos.err) {
+        console.log(asentamientos.err);
+        res.redirect("/");
+        return;
+      }
+      fetch(`http://localhost/data/inmuebles/${req.params.idInmueble}`)
+        .then((data) => data.json())
+        .then((data) => {
+          if (!data.results[0]) {
+            res.redirect("/");
+            return;
+          }
+          res.render("proyecto", {
+            cps: asentamientos.results,
+            actor,
+            creado: true,
+            datos: data.results[0],
+          });
+        });
+    });
+});
+
+router.get("/inmueble/:idInmueble", (req, res) => {
+  const actor = req.session.tipo;
+  if (actor == "Agente" || actor == "Gerente" || actor == "Valuador") {
+    res.redirect(`/editar/${req.params.idInmueble}`);
+    return;
+  }
+  fetch("http://localhost/data/cp")
+    .then((data) => data.json())
+    .then((asentamientos) => {
+      if (asentamientos.err) {
+        console.log(asentamientos.err);
+        res.redirect("/");
+        return;
+      }
+      fetch(`http://localhost/data/inmuebles/${req.params.idInmueble}`)
+        .then((data) => data.json())
+        .then((data) => {
+          if (!data.results[0]) {
+            res.redirect("/");
+            return;
+          }
+          res.render("proyecto", {
+            cps: asentamientos.results,
+            actor,
+            creado: true,
+            datos: data.results[0],
+          });
+        });
     });
 });
 
@@ -239,7 +319,7 @@ router.post("/login", (req, res) => {
             break;
           case "Agente":
             ruta = "agentes";
-
+            identificador = "idagente_ventas";
             break;
         }
 
@@ -281,7 +361,7 @@ router.post("/nuevo", (req, res) => {
           headers: { "Content-Type": "application/json" },
         }
       ).then(() => {
-        res.end();
+        res.json({ idInmueble: datos.idInmueble }).end();
       });
     });
 });

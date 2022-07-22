@@ -12,7 +12,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Arima:wght@100&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -24,76 +23,98 @@
         <div class="col py-3">
           <div class="container h-auto w-100" style=" margin:0; ">
             <div class="row">
-              <img class="rounded-4 col" src="https://www.casasparaconstruir.com/projetos/161/01.jpg" alt="perfil" style="max-width: 500px; height: 500px;">
+              <div class="col">
+                <div class="row">
+                  <img class="rounded-4" src="https://www.casasparaconstruir.com/projetos/161/01.jpg" alt="perfil" style="max-width: 500px; height: 500px;">
+                </div>
+                <% if(creado && (actor == "Gerente" || actor == "Agente")){ %>
+                <div class="row pt-3" style="max-width: 75%; margin: 0 auto;">
+                  <h3 class="text-center">Solicitar Valuador</h3>
+                  <select name="valuadores" id="valuadores" class="form-control">
+                    <option value="" selected disabled hidden>Seleccione un valuador</option>
+                  </select>
+                  <button type="button" class="btn btn-success mt-2" id="btnValuador">Solicitar Valuador</button>
+                </div>
+                <% } %>
+              </div>
               <div class="col">
                 <form id="frmInmueble">
                   <div class="mb-3">
                     <label for="titulo" class="form-label">Titulo</label>
-                    <input type="text" name="titulo" id="titulo" class="form-control" placeholder="Introduzca el titulo del inmueble" required>
+                    <input type="text" name="titulo" id="titulo" class="form-control" placeholder="Introduzca el titulo del inmueble" value="<%= datos ? datos.titulo : ''%>" required>
                   </div>
                   <div class="mb-3">
                     <label for="precio_venta" class="form-label">Precio Venta</label>
-                    <input type="number" name="precio_venta" id="precio_venta" class="form-control" min="0" value="0" required>
+                    <input type="number" name="precio_venta" id="precio_venta" class="form-control" min="0" value="<%= datos ? datos.precio_venta : 0%>" required>
                   </div>
                   <div class="mb-3">
                     <label for="precio_renta" class="form-label">Precio Renta</label>
-                    <input type="number" name="precio_renta" id="precio_renta" class="form-control" min="0" value="0" required>
+                    <input type="number" name="precio_renta" id="precio_renta" class="form-control" min="0" value="<%= datos ? datos.precio_renta : 0%>" required>
                   </div>
                   <div class="mb-3">
                     <label for="cuartos" class="form-label">Cuartos</label>
-                    <input type="number" name="cuartos" id="cuartos" class="form-control" min="0" value="0" required>
+                    <input type="number" name="cuartos" id="cuartos" class="form-control" min="0" value="<%= datos ? datos.cuartos : 0%>" required>
                   </div>
                   <div class="mb-3">
                     <label for="pisos" class="form-label">Pisos</label>
-                    <input type="number" name="pisos" id="pisos" class="form-control" min="0" value="0" required>
+                    <input type="number" name="pisos" id="pisos" class="form-control" min="0" value="<%= datos ? datos.pisos : 0%>" required>
                   </div>
                   <div class="mb-3">
                     <label for="area" class="form-label">Area</label>
-                    <input type="number" name="area" id="area" class="form-control" min="0" value="0" required>
+                    <input type="number" name="area" id="area" class="form-control" min="0" value="<%= datos ? datos.area : 0%>" required>
                   </div>
                   <div class="mb-3">
                     <label for="direccion" class="form-label">Dirección</label>
-                    <textarea name="direccion" id="direccion" rows="2" class="form-control" required></textarea>
+                    <textarea name="direccion" id="direccion" rows="2" class="form-control" required><%= datos ? datos.direccion : ''%></textarea>
                   </div>
                   <div class="mb-3">
                     <label for="codigoPostal" class="form-label">Asentamiento</label>
                     <select name="codigoPostal" id="codigoPostal" class="form-control">
                       <option value="" selected disabled hidden>Seleccione un asentamiento</option>
                       <% cps.forEach(cp =>{ %>
-                      <option value="<%= cp.idcodigo_postal %>"><%= cp.asentamiento %></option>
+                      <% let selected = cp.idcodigo_postal == datos.idcodigo_postal ? "selected":"" %>
+                      <option value=" <%= cp.idcodigo_postal %>" <%= selected %>><%= cp.asentamiento %></option>
                       <% }) %>
                     </select>
                   </div>
-                  <button type="submit" class="btn btn-primary"><%= creado ? "Actualizar Datos" : "Registrar Inmueble" %></button>
-                  <% if(creado){ %>
-                  <button type="submit" class="btn btn-danger">Eliminar proyecto</button>
+                  <% if(actor == "Gerente" || actor == "Agente" || actor == "Valuador"){ %>
+                  <button type="submit" class="btn btn-primary" onclick="<%= creado ? 'actualizarInmueble()': 'crearInmueble()' %>"><%= creado ? "Actualizar Datos" : "Registrar Inmueble" %></button>
+                  <% if(creado && (actor == "Gerente" || actor == "Agente")){ %>
+                  <button type="submit" class="btn btn-danger" onclick="eliminarInmueble()">Eliminar proyecto</button>
+                  <% } %>
                   <% } %>
                 </form>
               </div>
             </div>
             <% if(creado){ %>
-            <div class="row">
-              <div class="col container">
+            <div class="row mt-5">
+              <div class="col-5 container">
                 <div class="row">
-                  <form id="frmServicios">
-                    <div class="mb-3">
-                      <label for="servicio" class="form-label">Servicios</label>
-                      <select name="servicio" id="servicio">
-                        <option value="" selected disabled hidden>Seleccione un servicio</option>
-                      </select>
-                    </div>
-                    <div class="btn-group" role="group">
-                      <button type="button" class="btn btn-success" id="agServicio">Agregar Servicio</button>
-                      <button type="button" class="btn btn-primary" id="regServicio">Registrar Servicio</button>
-                    </div>
-                  </form>
+                  <% if(actor == "Gerente" || actor == "Agente"){ %>
+                  <div class="mb-3">
+                    <label for="servicio" class="form-label">Servicios</label>
+                    <select name="servicio" id="servicio" class="form-control">
+                      <option value="" selected disabled hidden>Seleccione un servicio</option>
+                    </select>
+                  </div>
+                  <% } else{ %>
+                  <h2 class="text-center text-dark">Servicios</h2>
+                  <% } %>
+                  <% if(actor == "Gerente" || actor == "Agente"){ %>
+                  <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-success" id="agServicio">Agregar Servicio</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalServicios">
+                      Registrar Servicio
+                    </button>
+                  </div>
+                  <% } %>
                 </div>
                 <div class="row">
                   <table class="table" id="tblServicios">
                     <thead>
                       <tr>
-                        <th scope="col">#</th>
                         <th scope="col">Nombre</th>
+                        <th scope="col">Accion</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -101,34 +122,41 @@
                   </table>
                 </div>
               </div>
-              <div class="col container">
+              <div class="col-7 container">
+                <% if(actor == "Gerente" || actor == "Agente"){ %>
                 <div class="row">
-                  <form id="frmAdeudos">
-                    <div class="mb-3">
-                      <label for="adeudo" class="form-label">Adeudos</label>
-                      <select name="adeudo" id="adeudo">
-                        <option value="" selected disabled hidden>Seleccione un adeudo</option>
-                      </select>
-                    </div>
-                    <div class="btn-group" role="group">
-                      <button type="button" class="btn btn-success" id="agAdeudo">Agregar Adeudo</button>
-                      <button type="button" class="btn btn-primary" id="regAdeudo">Registrar Adeudo</button>
-                    </div>
-                  </form>
+                  <div class="mb-3">
+                    <label for="adeudo" class="form-label">Adeudos</label>
+                    <select name="adeudo" id="adeudo" class="form-control">
+                      <option value="" selected disabled hidden>Seleccione un adeudo</option>
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <label for="cantidad" class="form-label">cantidad</label>
+                    <input type="text" name="cantidad" id="cantidad" class="form-control">
+                  </div>
+                  <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-success" id="agAdeudo">Agregar Adeudo</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAdeudos">
+                      Registrar Adeudo
+                    </button>
+                  </div>
+
                 </div>
                 <div class="row">
-                  <table class="table" id="tblServicios">
+                  <table class="table" id="tblAdeudos">
                     <thead>
                       <tr>
-                        <th scope="col">#</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Cantidad</th>
+                        <th scope="col">Accion</th>
                       </tr>
                     </thead>
                     <tbody>
                     </tbody>
                   </table>
                 </div>
+                <% } %>
               </div>
             </div>
             <% } %>
@@ -137,9 +165,51 @@
       </div>
     </div>
   </div> <!--   BARRA LATERAL IZQUIERDA   -->
+  <!--MODALS-->
+  <!-- Modal -->
+  <div class="modal fade" id="modalAdeudos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Registro Adeudo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="nombreAdeudo" class="form-label">Nombre Adeudo</label>
+            <input type="text" name="nombreAdeudo" id="nombreAdeudo" class="form-control">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" id="radeudo">Registrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="modalServicios" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Registro de servicio</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="nombreServicio" class="form-label">Nombre Servicio</label>
+            <input type="text" name="nombreServicio" id="nombreServicio" class="form-control">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" id="rservicio">Registrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer -->
+  <%- include('./partials/footer.ejs') %>
+  <script src="/js/inmueble.js"></script>
 </body>
-<!-- Footer -->
-<%- include('./partials/footer.ejs') %>
-<script src="/js/inmueble.js"></script>
 
 </html>

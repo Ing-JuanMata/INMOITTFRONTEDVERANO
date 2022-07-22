@@ -35,16 +35,26 @@
                     <% cont++; %>
                     <div class="col-4">
                       <div class="card shadow-sm">
+                        <div class="card-header">
+                          <h5 class="card-title"><%= proyecto.titulo %></h5>
+                        </div>
                         <img src="http://localhost/IMG/inmo2.jpg" width="100%" height="225">
-
                         <div class="card-body">
-                          <p class="card-text">Casa en venta en la col. San Felipe Hueyotlipan ubicada muy cerca del Fracc. Antigua Cementera, con accesos desde el blvd San Felipe y la autopista Mex-Pue. La casa cuenta con dos niveles distribuidos de la siguiente manera, planta baja: sala, comedor, cocina integral, patio de ...</p>
+                          <p class="card-text">Direccion: <%= proyecto.direccion %> </p>
+                          <div class="container">
+                            <div class="row">
+                              <div class="col">
+                                <p class="card-text"></p>
+                              </div>
+                              <div class="col">
+                                <p class="card-text"></p>
+                              </div>
+                            </div>
+                          </div>
                           <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                              <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                              <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                              <a href="<%= (actor == 'Cliente' || actor == 'Admin' || !actor) ? `/inmueble/${proyecto.idinmueble}` : `/editar/${proyecto.idinmueble}` %>" type="button" class="btn btn-outline-primary"><%= (actor == "Cliente" || actor == "Admin" || !actor) ? "Ver Inmueble" : "Editar Inmueble" %></a>
                             </div>
-                            <small class="text-muted">9 mins</small>
                           </div>
                         </div>
                       </div>
