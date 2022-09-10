@@ -4,20 +4,19 @@ const path = require("path");
 const session = require("express-session");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const sharp = require("sharp");
 const multer = require("multer");
 const routes = require("./routes");
-const DataRoutes = require("./api/routes");
+//const DataRoutes = require("./api/routes");
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "./uploads/");
-  },
-  filename: (req, file, cb) => {
-    const ext = file.originalname.split(".").pop();
-    cb(null, `${Date.now()}.${ext}`);
-  },
-});
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, "./uploads/");
+//   },
+//   filename: (req, file, cb) => {
+//     const ext = file.originalname.split(".").pop();
+//     cb(null, `${Date.now()}.${ext}`);
+//   },
+// });
 
 const app = express();
 
@@ -45,7 +44,7 @@ app.use(routes);
 app.use("/data", DataRoutes);
 
 // static files
-app.use(express.static(path.join(__dirname, "public")));
+// app.use(express.static(path.join(__dirname, "public")));
 
 // start the server
 app.listen(app.get("port"), () => {

@@ -18,7 +18,7 @@ router.get("/", (req, res) => {
     default:
       ruta = "inmuebles";
   }
-  fetch(`http://localhost/data/${ruta}`)
+  fetch(`http://localhost/data/${ruta}`)//t/data/inmuebles
     .then((data) => data.json())
     .then((data) => {
       res.render("proyectos", {
