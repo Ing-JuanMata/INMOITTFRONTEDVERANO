@@ -212,7 +212,7 @@ router.get("/about", (req, res) => {
           admins: [],
         });
       }
-      res.render("sobreEmpresa", {
+      res.render("SobreEmpresa", {
         actor: req.session.tipo,
         admins: data.results,
       });
