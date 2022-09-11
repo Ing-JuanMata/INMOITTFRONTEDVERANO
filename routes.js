@@ -18,7 +18,7 @@ router.get("/", (req, res) => {
     default:
       ruta = "inmuebles";
   }
-  fetch(`http://localhost/data/${ruta}`)//t/data/inmuebles
+  fetch(`http://db:3001/${ruta}`)//t/data/inmuebles
     .then((data) => data.json())
     .then((data) => {
       res.render("proyectos", {
@@ -29,7 +29,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/registro", (req, res) => {
-  fetch("http://localhost/data/cp")
+  fetch("http://db:3001/cp")
     .then((data) => data.json())
     .then((asentamientos) => {
       if (asentamientos.err) {
@@ -64,7 +64,7 @@ router.get("/nuevo", (req, res) => {
     return;
   }
 
-  fetch("http://localhost/data/cp")
+  fetch("http://db:3001/cp")
     .then((data) => data.json())
     .then((asentamientos) => {
       if (asentamientos.err) {
@@ -87,7 +87,7 @@ router.get("/editar/:idInmueble", (req, res) => {
     res.redirect(`/inmueble/${req.params.idInmueble}`);
     return;
   }
-  fetch("http://localhost/data/cp")
+  fetch("http://db:3001/cp")
     .then((data) => data.json())
     .then((asentamientos) => {
       if (asentamientos.err) {
@@ -95,7 +95,7 @@ router.get("/editar/:idInmueble", (req, res) => {
         res.redirect("/");
         return;
       }
-      fetch(`http://localhost/data/inmuebles/${req.params.idInmueble}`)
+      fetch(`http://db:3001/inmuebles/${req.params.idInmueble}`)
         .then((data) => data.json())
         .then((data) => {
           if (!data.results[0]) {
@@ -118,7 +118,7 @@ router.get("/inmueble/:idInmueble", (req, res) => {
     res.redirect(`/editar/${req.params.idInmueble}`);
     return;
   }
-  fetch("http://localhost/data/cp")
+  fetch("http://db:3001/cp")
     .then((data) => data.json())
     .then((asentamientos) => {
       if (asentamientos.err) {
@@ -126,7 +126,7 @@ router.get("/inmueble/:idInmueble", (req, res) => {
         res.redirect("/");
         return;
       }
-      fetch(`http://localhost/data/inmuebles/${req.params.idInmueble}`)
+      fetch(`http://db:3001/inmuebles/${req.params.idInmueble}`)
         .then((data) => data.json())
         .then((data) => {
           if (!data.results[0]) {
@@ -177,7 +177,7 @@ router.get("/perfil", (req, res) => {
       res.redirect("/");
       return;
   }
-  fetch(`http://localhost/data/${ruta}/${req.session.correo}`)
+  fetch(`http://db:3001/${ruta}/${req.session.correo}`)
     .then((data) => data.json())
     .then((data) => {
       if (data.err) {
@@ -185,7 +185,7 @@ router.get("/perfil", (req, res) => {
         return;
       }
       let datos = data.results[0];
-      fetch("http://localhost/data/cp")
+      fetch("http://db:3001/cp")
         .then((data) => data.json())
         .then((data) => {
           if (data.err) {
@@ -203,7 +203,7 @@ router.get("/perfil", (req, res) => {
 });
 
 router.get("/about", (req, res) => {
-  fetch("http://localhost/data/administradores")
+  fetch("http://db:3001/administradores")
     .then((data) => data.json())
     .then((data) => {
       if (data.err) {
@@ -225,7 +225,7 @@ router.get("/usuarios", (req, res) => {
     return;
   }
 
-  fetch("http://localhost/data/cuentas")
+  fetch("http://db:3001/cuentas")
     .then((data) => data.json())
     .then((data) => {
       if (data.err) {
@@ -266,7 +266,7 @@ router.get("/usuarios/:correo/:tipo", (req, res) => {
       ruta = "valuadores";
       break;
   }
-  fetch(`http://localhost/data/${ruta}/${req.params.correo}`)
+  fetch(`http://db:3001/${ruta}/${req.params.correo}`)
     .then((data) => data.json())
     .then((data) => {
       if (data.err) {
@@ -290,7 +290,7 @@ router.post("/session", (req, res) => {
 });
 
 router.post("/login", (req, res) => {
-  fetch(`http://localhost/data/cuentas/${req.body.correo}`)
+  fetch(`http://db:3001/cuentas/${req.body.correo}`)
     .then((data) => (data.json ? data.json() : res.status(401).end()))
     .then((data) => {
       if (!data.results[0]) {
@@ -325,7 +325,7 @@ router.post("/login", (req, res) => {
             break;
         }
 
-        fetch(`http://localhost/data/${ruta}/${req.body.correo}`)
+        fetch(`http://db:3001/${ruta}/${req.body.correo}`)
           .then((data) => (data.json ? data.json() : res.status(401).end()))
           .then((data) => {
             if (data.err) {
@@ -353,7 +353,7 @@ router.post("/nuevo", (req, res) => {
     req.session.tipo == "Gerente"
       ? { idGerente: req.session.clave }
       : { idAgente: req.session.clave };
-  fetch(`http://localhost/data/Inmueble`, {
+  fetch(`http://db:3001/Inmueble`, {
     method: "POST",
     body: JSON.stringify(req.body),
     headers: { "Content-Type": "application/json" },
@@ -363,8 +363,8 @@ router.post("/nuevo", (req, res) => {
       datos.idInmueble = data.results.insertId;
       fetch(
         req.session.tipo == "Gerente"
-          ? "http://localhost/data/gerenteProyecto"
-          : "http://localhost/data/agenteInmueble",
+          ? "http://db:3001/gerenteProyecto"
+          : "http://db:3001/agenteInmueble",
         {
           method: "POST",
           body: JSON.stringify(datos),
@@ -398,7 +398,7 @@ router.put("/perfil", (req, res) => {
   let datos = req.body;
   datos.correoN = datos.correo;
   datos.correo = req.session.correo;
-  fetch(`http://localhost/data/${ruta}`, {
+  fetch(`http://db:3001/${ruta}`, {
     method: "PUT",
     body: JSON.stringify(datos),
     headers: { "Content-Type": "application/json" },
@@ -415,7 +415,7 @@ router.put("/perfil", (req, res) => {
 });
 
 router.put("/cuenta", (req, res) => {
-  fetch("http://localhost/data/cuenta", {
+  fetch("http://db:3001/cuenta", {
     method: "PUT",
     body: JSON.stringify({
       password: req.body.password,

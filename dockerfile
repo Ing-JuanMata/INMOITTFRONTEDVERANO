@@ -1,8 +1,8 @@
 FROM node:16-buster
 
-RUN git clone https://github.com/Ing-JuanMata/INMOITTAPI.git
+RUN git clone https://github.com/Ing-JuanMata/INMOITTFRONTEDVERANO.git
 
-WORKDIR /INMOITTAPI
+WORKDIR /INMOITTFRONTEDVERANO
 
 RUN npm i
 
