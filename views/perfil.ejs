@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>InmobITT</title>
-  <link preload="main.css" href="http://localhost:3001/CSS/main.css" as="style">
-  <link href="http://localhost:3001/CSS/main.css" rel="stylesheet">
+  <link preload="main.css" href="http://localhost:3001/css/main.css" as="style">
+  <link href="http://localhost:3001/css/main.css" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Arima:wght@100&display=swap" rel="stylesheet">
@@ -24,9 +24,9 @@
           <div class="container h-auto w-100" style=" margin:0; ">
             <div class="row">
               <div class="col">
-                <img class="rounded-circle row" src="<%= datos.foto %>" alt="perfil">
+                <img class="rounded-circle row" src="http://localhost:3001<%= datos.foto %>" alt="perfil">
                 <div class="row">
-                  <form action="/data/perfil" method="post" enctype="multipart/form-data">
+                  <form action="http://localhost:3001/perfil" method="post" enctype="multipart/form-data">
                     <label for="img" class="form-label">Imagen</label>
                     <input type="file" name="img" id="img" class="form-control mb-3" required>
                     <button type="submit" class="btn btn-primary">Actualizar</button>
@@ -96,6 +96,6 @@
 </body>
 <!-- Footer -->
 <%- include('./partials/footer.ejs') %>
-<script src="/js/perfil.js"></script>
+<script src="http://localhost:3001/js/perfil.js"></script>
 
 </html>
