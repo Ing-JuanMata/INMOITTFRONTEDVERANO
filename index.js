@@ -1,7 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const path = require("path");
-// const session = require("express-session");
+const session = require("express-session");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 // const multer = require("multer");
@@ -31,13 +31,13 @@ app.use(cors());
 app.use(morgan("tiny"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(
-//   session({
-//     saveUninitialized: true,
-//     resave: true,
-//     secret: "InmoITT",
-//   })
-// );
+app.use(
+  session({
+    saveUninitialized: true,
+    resave: true,
+    secret: "InmoITT",
+  })
+);
 
 // routes
 app.use(routes);
