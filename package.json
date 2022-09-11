@@ -4,7 +4,8 @@
   "description": "Proyecto para la materia de programacion web",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "start": "node index.js"
   },
   "author": "Equipo D",
   "license": "ISC",
