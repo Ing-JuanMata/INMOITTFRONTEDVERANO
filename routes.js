@@ -21,7 +21,7 @@ router.get("/", (req, res) => {
   fetch(`http://api:3001/${ruta}`)//t/data/inmuebles
     .then((data) => data.json())
     .then((data) => {
-      res.render("proyectos", {
+      res.render("Proyectos", {
         proyectos: data.results,
         actor,
       });
@@ -207,7 +207,7 @@ router.get("/about", (req, res) => {
     .then((data) => data.json())
     .then((data) => {
       if (data.err) {
-        res.render("sobreEmpresa", {
+        res.render("SobreEmpresa", {
           actor: req.session.tipo,
           admins: [],
         });
